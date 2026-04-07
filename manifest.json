@@ -1,6 +1,6 @@
 {
-  "name": "earnZone",
-  "short_name": "earnZone",
+  "name": "EarnFormation",
+  "short_name": "EarnFormation",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
