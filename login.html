@@ -348,6 +348,29 @@
       transform: none;
     }
 
+    .google-btn {
+      width: 100%;
+      padding: 15px 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      color: var(--text-light);
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .google-btn:hover { background: rgba(255,255,255,0.1); }
+    .google-btn:active { transform: scale(0.98); }
+    .google-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
     .auth-divider {
       display: flex;
       align-items: center;
@@ -528,6 +551,16 @@
         <div class="auth-divider-line"></div>
       </div>
 
+      <button type="button" class="google-btn" id="googleBtn" onclick="loginWithGoogle()">
+        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Continuer avec Google
+      </button>
+
       <div class="auth-footer">
         Pas encore de compte ? <a href="register.html">S'inscrire</a>
       </div>
@@ -535,20 +568,23 @@
   </main>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+    // ✅ NEXFORMATION — même config que register.html, index.html, profil.html
     const firebaseConfig = {
-      apiKey: "AIzaSyApqCllug-lRe5iHa6Yimor61JIke7mYOc",
-      authDomain: "earnzone-70680.firebaseapp.com",
-      projectId: "earnzone-70680",
-      storageBucket: "earnzone-70680.firebasestorage.app",
-      messagingSenderId: "50852812524",
-      appId: "1:50852812524:web:f7e8245e5b247ab8e077c9"
+      apiKey: "AIzaSyBWTEWAQjQuDzY26BghtTcqfdyVEmQZXe8",
+      authDomain: "nexformation-ebcc0.firebaseapp.com",
+      databaseURL: "https://nexformation-ebcc0-default-rtdb.firebaseio.com",
+      projectId: "nexformation-ebcc0",
+      storageBucket: "nexformation-ebcc0.firebasestorage.app",
+      messagingSenderId: "592625968577",
+      appId: "1:592625968577:web:53482aea0414983427bb40"
     };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
 
     let notificationTimer = null;
 
@@ -579,7 +615,29 @@
     }
 
     window.showForgotMessage = function() {
-      showNotification('Information', 'Veuillez contacter le support pour réinitialiser votre mot de passe', 'info');
+      showNotification('Information', 'Contactez le support pour reinitialiser votre mot de passe', 'info');
+    }
+
+    window.loginWithGoogle = async function() {
+      const googleBtn = document.getElementById('googleBtn');
+      const originalContent = googleBtn.innerHTML;
+      googleBtn.innerHTML = '<span class="loader"></span> Connexion...';
+      googleBtn.disabled = true;
+
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        localStorage.setItem('NexFormation_current_user', user.uid);
+        showNotification('Succes', 'Connexion Google reussie ! Redirection...', 'success');
+        setTimeout(function() { window.location.href = 'index.html'; }, 2000);
+      } catch (error) {
+        let msg = "Erreur connexion Google";
+        if (error.code === 'auth/popup-blocked') msg = "Popup bloque. Autorisez les popups pour ce site.";
+        else if (error.code === 'auth/popup-closed-by-user') msg = "Fenetre fermee avant la fin";
+        showNotification('Erreur', msg, 'error');
+        googleBtn.innerHTML = originalContent;
+        googleBtn.disabled = false;
+      }
     }
 
     async function loginUser(event) {
@@ -611,10 +669,9 @@
         }
         
         localStorage.setItem('NexFormation_current_user', user.uid);
+        showNotification('Succes', 'Connexion reussie ! Redirection...', 'success');
         
-        showNotification('Succès', 'Connexion réussie ! Redirection...', 'success');
-        
-        setTimeout(() => {
+        setTimeout(function() {
           window.location.href = 'index.html';
         }, 2000);
         
@@ -623,22 +680,28 @@
         let errorMessage = "Erreur lors de la connexion";
         switch (error.code) {
           case 'auth/user-not-found':
-            errorMessage = "Aucun compte associé à cet email";
+            errorMessage = "Aucun compte associe a cet email";
             break;
           case 'auth/wrong-password':
             errorMessage = "Mot de passe incorrect";
+            break;
+          case 'auth/invalid-credential':
+            // Firebase v10+ regroupe user-not-found + wrong-password ici
+            errorMessage = "Email ou mot de passe incorrect";
             break;
           case 'auth/invalid-email':
             errorMessage = "Adresse email invalide";
             break;
           case 'auth/too-many-requests':
-            errorMessage = "Trop de tentatives. Réessayez plus tard";
+            errorMessage = "Trop de tentatives. Reessayez plus tard";
+            break;
+          case 'auth/network-request-failed':
+            errorMessage = "Verifiez votre connexion internet";
             break;
           default:
             errorMessage = error.message;
         }
         showNotification('Erreur', errorMessage, 'error');
-      } finally {
         loginBtn.innerHTML = originalContent;
         loginBtn.disabled = false;
       }
