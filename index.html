@@ -916,6 +916,9 @@
         <div class="user-avatar" id="userAvatar">U</div>
         <span class="user-name" id="userName">Utilisateur</span>
       </a>
+      <div class="logout-btn" id="logoutBtn" onclick="window.handleLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+      </div>
     </div>
   </header>
 
@@ -948,7 +951,7 @@
         <div class="stat-icon">
           <i class="fas fa-users"></i>
         </div>
-        <div class="stat-value" id="studentsCount">13.9k</div>
+        <div class="stat-value" id="studentsCount">0</div>
         <div class="stat-label">Étudiants</div>
       </div>
     </div>
@@ -1150,22 +1153,17 @@
     // Fonction globale pour le démarrage des cours
     window.startCourse = function(courseId, isFree, page, videoUrl) {
       if (!currentUser) {
-        showNotification('Connexion requise', 'Veuillez vous connecter pour accéder aux formations', 'error');
-        setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+        showNotification('Connexion requise', 'Veuillez vous connecter pour acceder aux formations', 'error');
+        setTimeout(function() { window.location.href = 'login.html'; }, 1500);
         return;
       }
 
-      if (!isFree) {
-        showNotification('Formation Premium', 'Cette formation est payante. Contactez le support pour y accéder.', 'info');
-        return;
-      }
-
+      // Toutes les formations redirigent vers leur page
+      // (gratuite = accès direct, payante = page infos + saisie du code)
       if (page) {
-        showNotification('Accès gratuit', 'Démarrage de la formation...', 'success');
-        setTimeout(() => { window.location.href = page; }, 1000);
+        window.location.href = page;
       } else if (videoUrl) {
-        showNotification('Accès gratuit', 'Démarrage de la formation...', 'success');
-        setTimeout(() => { window.open(videoUrl, '_blank'); }, 1000);
+        window.open(videoUrl, '_blank');
       }
     };
 
@@ -1253,6 +1251,20 @@
       }
     }
 
+    async function updateStudentsCount() {
+      try {
+        const usersSnapshot = await getDocs(collection(db, "users"));
+        const count = usersSnapshot.size;
+        const studentsElement = document.getElementById('studentsCount');
+        if (studentsElement) studentsElement.textContent = count;
+      } catch (error) {
+        // Firestore peut bloquer si règles strictes — on affiche 0 silencieusement
+        console.warn("Comptage etudiants non disponible:", error.code);
+        const studentsElement = document.getElementById('studentsCount');
+        if (studentsElement) studentsElement.textContent = '0';
+      }
+    }
+
     window.handleLogout = async function() {
       try {
         await signOut(auth);
@@ -1276,6 +1288,7 @@
         localStorage.setItem('NexFormation_current_user', user.uid);
         await loadUserData();
         renderFormations();
+        await updateStudentsCount();
         updateUserUI();
       } else {
         const savedUid = localStorage.getItem('NexFormation_current_user');
@@ -1286,6 +1299,7 @@
         userData = null;
         renderFormations();
         updateUserUI();
+        updateStudentsCount();
       }
     });
 
@@ -1294,6 +1308,7 @@
     // ============================================
     document.addEventListener('DOMContentLoaded', () => {
       renderFormations();
+      updateStudentsCount();
       const totalCoursesEl = document.getElementById('totalCourses');
       if (totalCoursesEl) totalCoursesEl.textContent = formationsList.length;
     });
