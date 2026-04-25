@@ -948,7 +948,7 @@
         <div class="stat-icon">
           <i class="fas fa-users"></i>
         </div>
-        <div class="stat-value" id="studentsCount">3.9k</div>
+        <div class="stat-value" id="studentsCount">13.9k</div>
         <div class="stat-label">Étudiants</div>
       </div>
     </div>
@@ -1253,20 +1253,6 @@
       }
     }
 
-    async function updateStudentsCount() {
-      try {
-        const usersSnapshot = await getDocs(collection(db, "users"));
-        const count = usersSnapshot.size;
-        const studentsElement = document.getElementById('studentsCount');
-        if (studentsElement) studentsElement.textContent = count;
-      } catch (error) {
-        // Firestore peut bloquer si règles strictes — on affiche 0 silencieusement
-        console.warn("Comptage etudiants non disponible:", error.code);
-        const studentsElement = document.getElementById('studentsCount');
-        if (studentsElement) studentsElement.textContent = '0';
-      }
-    }
-
     window.handleLogout = async function() {
       try {
         await signOut(auth);
@@ -1290,7 +1276,6 @@
         localStorage.setItem('NexFormation_current_user', user.uid);
         await loadUserData();
         renderFormations();
-        await updateStudentsCount();
         updateUserUI();
       } else {
         const savedUid = localStorage.getItem('NexFormation_current_user');
@@ -1301,7 +1286,6 @@
         userData = null;
         renderFormations();
         updateUserUI();
-        updateStudentsCount();
       }
     });
 
@@ -1310,7 +1294,6 @@
     // ============================================
     document.addEventListener('DOMContentLoaded', () => {
       renderFormations();
-      updateStudentsCount();
       const totalCoursesEl = document.getElementById('totalCourses');
       if (totalCoursesEl) totalCoursesEl.textContent = formationsList.length;
     });
