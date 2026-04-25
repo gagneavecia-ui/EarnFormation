@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mon Profil - NX.Money</title>
+  <title>Mon Profil - NexFormation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,27 +10,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   
   <style>
-    /* ===== VARIABLES GLOBALES ===== */
     :root {
-      --primary: #00ffcc;
-      --primary-dark: #00cca3;
-      --secondary: #ff4d94;
-      --accent: #9d4edd;
-      --bg-dark: #000000;
-      --bg-medium: #050505;
-      --bg-light: #0d0d0d;
-      --text-light: #ffffff;
-      --text-dim: #6b7a8d;
-      --card-bg: rgba(6, 6, 6, 0.97);
-      --card-border: rgba(255, 255, 255, 0.04);
-      --success: #4cff4c;
-      --warning: #ffcc00;
-      --danger: #ff4757;
-      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95);
-      --shadow-glow: 0 0 30px rgba(0, 255, 204, 0.12);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-      --glass-bg: rgba(255, 255, 255, 0.012);
-      --glass-border: rgba(255, 255, 255, 0.025);
+      --primary: #B76EFF;
+      --primary-dark: #8B3FE8;
+      --primary-light: #D4A1FF;
+      --bg-dark: #030305;
+      --bg-medium: #08080F;
+      --text-light: #FFFFFF;
+      --text-dim: #8B90A8;
+      --card-bg: rgba(15, 15, 26, 0.85);
+      --card-border: rgba(183, 110, 255, 0.08);
+      --success: #2EE89A;
+      --warning: #FFD166;
+      --danger: #FF4D6D;
+      --shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.9);
+      --shadow-glow: 0 0 40px rgba(183, 110, 255, 0.2);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --glass-bg: rgba(183, 110, 255, 0.04);
+      --glass-border: rgba(183, 110, 255, 0.07);
     }
 
     * {
@@ -39,113 +36,129 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
     body {
       font-family: 'Inter', sans-serif;
-      background: #000000;
+      background: var(--bg-dark);
       color: var(--text-light);
-      position: relative;
       font-size: 14px;
       line-height: 1.5;
     }
 
-    .gradient-bg {
+    body::after {
+      content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: radial-gradient(circle at 20% 30%, rgba(0, 255, 204, 0.04) 0%, transparent 40%),
-                  radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.04) 0%, transparent 40%),
-                  radial-gradient(circle at 40% 80%, rgba(255, 77, 148, 0.03) 0%, transparent 40%),
-                  #000000;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
     }
 
-    .noise {
+    .gradient-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 20%, rgba(139, 63, 232, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 75%, rgba(183, 110, 255, 0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #030305 0%, #05051A 50%, #030305 100%);
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
       z-index: -1;
-      opacity: 0.07;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4xIiAvPjwvc3ZnPg==');
+      pointer-events: none;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(139, 63, 232, 0.15), transparent 70%);
+      top: -100px; left: -100px;
+    }
+
+    .orb-2 {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(183, 110, 255, 0.1), transparent 70%);
+      bottom: 20%; right: -80px;
+      animation-delay: -4s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -20px) scale(1.05); }
+      66% { transform: translate(-15px, 15px) scale(0.95); }
     }
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 5%;
-      background: rgba(0, 0, 0, 0.97);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
+      padding: 14px 5%;
+      background: rgba(3, 3, 5, 0.92);
+      backdrop-filter: blur(24px);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(183, 110, 255, 0.07);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
     }
 
     .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: black;
-      transform: rotate(45deg);
-      transition: var(--transition);
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #D4A1FF, #B76EFF, #8B3FE8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: nexusGlow 3s ease-in-out infinite;
     }
 
-    .logo-icon i {
-      transform: rotate(-45deg);
+    @keyframes nexusGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3) drop-shadow(0 0 10px rgba(183, 110, 255, 0.6)); }
     }
 
     .logo-text {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--text-light), var(--primary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.3px;
+      color: var(--text-light);
+      text-transform: uppercase;
     }
+
+    .logo-text span { color: var(--primary); }
 
     .back-btn {
       width: 40px;
       height: 40px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-light);
       font-size: 18px;
       cursor: pointer;
-      transition: var(--transition);
       text-decoration: none;
+      transition: all 0.3s ease;
     }
 
-    .back-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
+    .back-btn:active {
+      background: rgba(183, 110, 255, 0.12);
+      transform: scale(0.95);
     }
 
     .container {
@@ -154,18 +167,17 @@
       padding: 20px 16px;
     }
 
-    /* ===== PROFIL CARD ===== */
+    /* ===== PROFIL HEADER ===== */
     .profile-header {
-      background: rgba(5, 5, 5, 0.98);
+      background: var(--card-bg);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 30px 20px;
       margin-bottom: 20px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
     }
 
     .profile-header::before {
@@ -173,28 +185,71 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.4), rgba(157, 78, 221, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(183, 110, 255, 0.4), transparent);
+    }
+
+    /* ===== PHOTO DE PROFIL AVEC UPLOAD ===== */
+    .profile-avatar-container {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 15px;
+      cursor: pointer;
     }
 
     .profile-avatar-large {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 38px;
       font-weight: 700;
+      color: white;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 1), 0 0 0 5px rgba(183, 110, 255, 0.3), 0 0 20px rgba(183, 110, 255, 0.2);
+      object-fit: cover;
+    }
+
+    .profile-avatar-large img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .camera-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: black;
-      margin: 0 auto 15px;
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 1), 0 0 0 5px rgba(0, 255, 204, 0.2), 0 0 20px rgba(0, 255, 204, 0.15);
+      font-size: 14px;
+      border: 2px solid var(--bg-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .camera-icon:active {
+      transform: scale(0.9);
+    }
+
+    #profilePhotoInput {
+      display: none;
     }
 
     .profile-name {
       font-size: 24px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 5px;
+      letter-spacing: -0.3px;
     }
 
     .profile-email {
@@ -217,12 +272,12 @@
 
     .access-badge {
       display: inline-block;
-      background: rgba(76, 255, 76, 0.08);
-      border: 1px solid rgba(76, 255, 76, 0.3);
+      background: rgba(46, 232, 154, 0.1);
+      border: 1px solid rgba(46, 232, 154, 0.3);
       color: var(--success);
       padding: 8px 16px;
       border-radius: 30px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       margin-top: 15px;
     }
@@ -231,23 +286,23 @@
       margin-right: 5px;
     }
 
-    /* ===== STATISTIQUES ===== */
+    /* ===== STATISTIQUES - UNIQUEMENT FORMATIONS ===== */
     .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      display: flex;
+      justify-content: center;
       margin-bottom: 20px;
     }
 
     .stat-card {
-      background: rgba(5, 5, 5, 0.98);
+      background: var(--card-bg);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 16px;
-      padding: 16px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 20px 30px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      min-width: 180px;
     }
 
     .stat-card::before {
@@ -255,30 +310,33 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(183, 110, 255, 0.4), transparent);
     }
 
     .stat-value {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--primary);
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .stat-label {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-dim);
+      font-weight: 500;
     }
 
     /* ===== MENU ===== */
     .menu-list {
-      background: rgba(5, 5, 5, 0.98);
+      background: var(--card-bg);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
       overflow: hidden;
       margin-bottom: 20px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
     }
 
     .menu-item {
@@ -286,26 +344,26 @@
       align-items: center;
       gap: 15px;
       padding: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+      border-bottom: 1px solid rgba(183, 110, 255, 0.05);
       text-decoration: none;
       color: var(--text-light);
-      transition: var(--transition);
+      transition: all 0.3s ease;
     }
 
     .menu-item:last-child {
       border-bottom: none;
     }
 
-    .menu-item:hover {
-      background: rgba(0, 255, 204, 0.03);
+    .menu-item:active {
+      background: rgba(183, 110, 255, 0.05);
     }
 
     .menu-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      background: rgba(183, 110, 255, 0.08);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -318,8 +376,8 @@
     }
 
     .menu-title {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       margin-bottom: 4px;
     }
 
@@ -337,26 +395,22 @@
     .logout-btn {
       width: 100%;
       padding: 16px;
-      background: rgba(255, 77, 148, 0.06);
-      border: 1px solid rgba(255, 77, 148, 0.25);
+      background: rgba(255, 77, 109, 0.08);
+      border: 1px solid rgba(255, 77, 109, 0.25);
       border-radius: 16px;
-      color: var(--secondary);
-      font-size: 16px;
-      font-weight: 600;
+      color: var(--danger);
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
 
-    .logout-btn:hover {
-      background: rgba(255, 77, 148, 0.12);
-      transform: translateY(-2px);
-    }
-
     .logout-btn:active {
+      background: rgba(255, 77, 109, 0.15);
       transform: scale(0.98);
     }
 
@@ -366,17 +420,17 @@
       bottom: 20px;
       left: 16px;
       right: 16px;
-      background: rgba(2, 2, 2, 0.98);
+      background: rgba(8, 8, 20, 0.97);
       backdrop-filter: blur(20px);
       border: 1px solid var(--primary);
-      border-radius: 16px;
-      padding: 12px 16px;
+      border-radius: 18px;
+      padding: 13px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      z-index: 1000;
-      transform: translateY(200px);
-      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      gap: 13px;
+      z-index: 1100;
+      transform: translateY(120px);
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .notification.show {
@@ -384,20 +438,21 @@
     }
 
     .notification-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      background: rgba(183, 110, 255, 0.15);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: black;
+      color: var(--primary);
       font-size: 18px;
     }
 
     .notification-content h4 {
       font-size: 14px;
-      margin-bottom: 4px;
+      font-weight: 700;
+      margin-bottom: 2px;
     }
 
     .notification-content p {
@@ -411,6 +466,7 @@
 
     .notification.error .notification-icon {
       background: var(--danger);
+      color: white;
     }
 
     .notification.success {
@@ -419,30 +475,16 @@
 
     .notification.success .notification-icon {
       background: var(--success);
+      color: black;
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== SCRIPT DE PROTECTION ===== -->
-  <script>
-    (function() {
-      let userId = localStorage.getItem('NX_Money_current_user');
-      if (!userId) {
-        userId = localStorage.getItem('earnzone_current_user');
-      }
-      if (!userId) {
-        window.location.href = 'login.html';
-        return;
-      }
-    })();
-  </script>
-
-  <!-- ===== BACKGROUND ===== -->
   <div class="gradient-bg"></div>
-  <div class="noise"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-  <!-- ===== NOTIFICATION ===== -->
   <div class="notification" id="notification">
     <div class="notification-icon">
       <i class="fas fa-info"></i>
@@ -453,26 +495,29 @@
     </div>
   </div>
 
-  <!-- ===== HEADER ===== -->
   <header class="header">
     <a href="index.html" class="logo">
-      <div class="logo-icon">
-        <i class="fas fa-bolt"></i>
-      </div>
-      <div class="logo-text">EarnZone</div>
+      <div class="logo-icon">N</div>
+      <div class="logo-text">NEX<span>FORMATION</span></div>
     </a>
-    
     <a href="index.html" class="back-btn">
       <i class="fas fa-home"></i>
     </a>
   </header>
 
-  <!-- ===== CONTENU PRINCIPAL ===== -->
   <main class="container">
     
-    <!-- ===== PROFIL ===== -->
     <div class="profile-header">
-      <div class="profile-avatar-large" id="profileAvatar">U</div>
+      <div class="profile-avatar-container" onclick="document.getElementById('profilePhotoInput').click()">
+        <div class="profile-avatar-large" id="profileAvatar">
+          <span id="avatarLetter">U</span>
+        </div>
+        <div class="camera-icon">
+          <i class="fas fa-camera"></i>
+        </div>
+      </div>
+      <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+      
       <h1 class="profile-name" id="profileName">Chargement...</h1>
       <p class="profile-email" id="profileEmail">chargement...</p>
       <p class="profile-phone" id="profilePhone"></p>
@@ -491,13 +536,8 @@
         <div class="stat-value" id="coursesCompleted">0</div>
         <div class="stat-label">Formations suivies</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-value" id="certificates">0</div>
-        <div class="stat-label">Certificats</div>
-      </div>
     </div>
 
-    <!-- ===== MENU ===== -->
     <div class="menu-list">
       <a href="mes-formations.html" class="menu-item">
         <div class="menu-icon">
@@ -506,19 +546,6 @@
         <div class="menu-content">
           <div class="menu-title">Mes formations</div>
           <div class="menu-subtitle">Voir mes formations en cours</div>
-        </div>
-        <div class="menu-arrow">
-          <i class="fas fa-chevron-right"></i>
-        </div>
-      </a>
-
-      <a href="certificats.html" class="menu-item">
-        <div class="menu-icon">
-          <i class="fas fa-certificate"></i>
-        </div>
-        <div class="menu-content">
-          <div class="menu-title">Mes certificats</div>
-          <div class="menu-subtitle">Télécharger mes certificats</div>
         </div>
         <div class="menu-arrow">
           <i class="fas fa-chevron-right"></i>
@@ -552,93 +579,42 @@
       </a>
     </div>
 
-    <!-- ===== BOUTON DÉCONNEXION ===== -->
-    <button class="logout-btn" onclick="logout()">
+    <button class="logout-btn" onclick="window.logout()">
       <i class="fas fa-sign-out-alt"></i>
       Se déconnecter
     </button>
 
   </main>
 
-  <script>
+  <script type="module">
     // ============================================
-    // VARIABLES
+    // CONFIGURATION FIREBASE CORRECTE (nexformation-ebcc0)
     // ============================================
-    let userData = null;
-    let userId = null;
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    // ✅ Configuration CORRECTE (la même que register.html et index.html)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBWTEWAQjQuDzY26BghtTcqfdyVEmQZXe8",
+      authDomain: "nexformation-ebcc0.firebaseapp.com",
+      databaseURL: "https://nexformation-ebcc0-default-rtdb.firebaseio.com",
+      projectId: "nexformation-ebcc0",
+      storageBucket: "nexformation-ebcc0.firebasestorage.app",
+      messagingSenderId: "592625968577",
+      appId: "1:592625968577:web:53482aea0414983427bb40"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
     let notificationTimer = null;
+    let currentUser = null;
+    let userData = null;
 
-    // ============================================
-    // INITIALISATION
-    // ============================================
-    function init() {
-      loadUserData();
-    }
-
-    // ============================================
-    // CHARGER LES DONNÉES UTILISATEUR
-    // ============================================
-    function loadUserData() {
-      userId = localStorage.getItem('NX_Money_current_user');
-      if (!userId) {
-        userId = localStorage.getItem('earnzone_current_user');
-      }
-      
-      if (!userId) {
-        window.location.href = 'login.html';
-        return;
-      }
-      
-      let userDataStr = localStorage.getItem(`NX_Money_user_${userId}`);
-      if (!userDataStr) {
-        userDataStr = localStorage.getItem(`earnzone_user_${userId}`);
-      }
-      
-      if (userDataStr) {
-        userData = JSON.parse(userDataStr);
-        
-        document.getElementById('profileName').textContent = userData.name || 'Utilisateur';
-        document.getElementById('profileEmail').textContent = userData.email || 'email@example.com';
-        document.getElementById('profileAvatar').textContent = (userData.name || 'U').charAt(0).toUpperCase();
-        
-        if (userData.phone) {
-          document.getElementById('profilePhone').innerHTML = '<i class="fas fa-phone"></i> ' + userData.phone;
-        }
-        
-        if (userData.createdAt) {
-          const date = new Date(userData.createdAt);
-          const formattedDate = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-          document.getElementById('memberSince').innerHTML = '<i class="fas fa-calendar-alt"></i> Membre depuis ' + formattedDate;
-        }
-        
-        const coursesCount = userData.courses?.length || 0;
-        document.getElementById('coursesCompleted').textContent = coursesCount;
-        document.getElementById('certificates').textContent = coursesCount;
-        
-        if (userData.fullAccess) {
-          document.getElementById('paidBadge').style.display = 'block';
-        }
-      } else {
-        document.getElementById('profileName').textContent = 'Utilisateur';
-        document.getElementById('profileEmail').textContent = 'Non disponible';
-      }
-    }
-
-    // ============================================
-    // DÉCONNEXION
-    // ============================================
-    function logout() {
-      localStorage.removeItem('NX_Money_current_user');
-      localStorage.removeItem('earnzone_current_user');
-      showNotification('Déconnexion', 'À bientôt !', 'success');
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 1500);
-    }
-
-    // ============================================
-    // AFFICHER NOTIFICATION
-    // ============================================
     function showNotification(title, message, type = 'info') {
       const notification = document.getElementById('notification');
       const notificationTitle = document.getElementById('notificationTitle');
@@ -659,20 +635,163 @@
         icon.className = 'fas fa-info';
       }
 
-      if (notificationTimer) {
-        clearTimeout(notificationTimer);
-      }
-
+      if (notificationTimer) clearTimeout(notificationTimer);
       notificationTimer = setTimeout(() => {
         notification.classList.remove('show');
       }, 3000);
     }
 
-    // ============================================
-    // DÉMARRER
-    // ============================================
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
+    // Remplir l'UI avec les données disponibles (Auth ou Firestore)
+    function fillProfileUI(name, email, phone, createdAt, courses, fullAccess, profilePhoto) {
+      document.getElementById('profileName').textContent = name || 'Utilisateur';
+      document.getElementById('profileEmail').textContent = email || '';
+      document.getElementById('avatarLetter').textContent = (name || 'U').charAt(0).toUpperCase();
 
+      // Téléphone — le champ peut s'appeler "phone" ou "telephone"
+      const phoneEl = document.getElementById('profilePhone');
+      if (phone && phone !== 'Non renseigne') {
+        phoneEl.innerHTML = '<i class="fas fa-phone"></i> ' + phone;
+      } else {
+        phoneEl.style.display = 'none';
+      }
+
+      // Date d'inscription
+      if (createdAt) {
+        try {
+          const date = new Date(createdAt);
+          const formattedDate = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+          document.getElementById('memberSince').innerHTML = '<i class="fas fa-calendar-alt"></i> Membre depuis ' + formattedDate;
+        } catch(e) {}
+      }
+
+      // Formations
+      document.getElementById('coursesCompleted').textContent = (courses || []).length;
+
+      // Badge accès illimité
+      if (fullAccess) {
+        document.getElementById('paidBadge').style.display = 'block';
+      }
+
+      // Photo de profil
+      if (profilePhoto) {
+        const avatarDiv = document.getElementById('profileAvatar');
+        avatarDiv.innerHTML = '<img src="' + profilePhoto + '" alt="Photo de profil" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">';
+      }
+    }
+
+    async function loadUserData() {
+      if (!currentUser) return;
+
+      // 1. D'abord on affiche ce qu'on a depuis Firebase Auth (immédiat, pas de permission)
+      const authName = currentUser.displayName || 'Utilisateur';
+      const authEmail = currentUser.email || '';
+      fillProfileUI(authName, authEmail, null, null, [], false, null);
+
+      // 2. Ensuite on essaie Firestore pour les données complètes
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+          userData = userDoc.data();
+          // Compatibilité champ "phone" ET "telephone"
+          const phone = userData.phone || userData.telephone || null;
+          fillProfileUI(
+            userData.name || authName,
+            userData.email || authEmail,
+            phone,
+            userData.createdAt,
+            userData.courses,
+            userData.fullAccess,
+            userData.profilePhoto
+          );
+        }
+        // Si le doc n'existe pas, on garde les données Auth déjà affichées
+      } catch (error) {
+        // Firestore bloqué par règles — les données Auth sont déjà affichées, rien ne se passe
+        console.warn("Firestore profil non disponible:", error.code);
+      }
+    }
+
+    async function uploadProfilePhoto(file) {
+      if (!currentUser) return;
+      
+      try {
+        showNotification('Upload', 'Telechargement en cours...', 'info');
+        
+        const storageRef = ref(storage, 'profile_photos/' + currentUser.uid);
+        await uploadBytes(storageRef, file);
+        const photoURL = await getDownloadURL(storageRef);
+        
+        // Essaie de sauver dans Firestore mais continue si ca bloque
+        try {
+          const userRef = doc(db, "users", currentUser.uid);
+          await updateDoc(userRef, { profilePhoto: photoURL });
+        } catch(e) {
+          console.warn("Firestore updateDoc skipped:", e.code);
+        }
+        
+        const avatarDiv = document.getElementById('profileAvatar');
+        avatarDiv.innerHTML = '<img src="' + photoURL + '" alt="Photo de profil" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">';
+        
+        showNotification('Succes', 'Photo de profil mise a jour !', 'success');
+      } catch (error) {
+        console.error("Erreur upload:", error);
+        showNotification('Erreur', "Impossible de telecharger la photo", 'error');
+      }
+    }
+
+    // ============================================
+    // ÉCOUTEUR CHANGEMENT PHOTO
+    // ============================================
+    document.getElementById('profilePhotoInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        if (file.size > 5 * 1024 * 1024) {
+          showNotification('Erreur', "L image ne doit pas depasser 5 Mo", 'error');
+          return;
+        }
+        uploadProfilePhoto(file);
+      } else if (file) {
+        showNotification('Erreur', "Veuillez selectionner une image valide", 'error');
+      }
+    });
+
+    // ============================================
+    // DÉCONNEXION
+    // ============================================
+    window.logout = async function() {
+      try {
+        await signOut(auth);
+        localStorage.removeItem('NexFormation_current_user');
+        showNotification('Déconnexion', 'À bientôt sur NexFormation !', 'success');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1500);
+      } catch (error) {
+        console.error(error);
+        showNotification('Erreur', 'Erreur lors de la déconnexion', 'error');
+      }
+    };
+
+    // ============================================
+    // AUTHENTIFICATION
+    // ============================================
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        localStorage.setItem('NexFormation_current_user', user.uid);
+        await loadUserData();
+      } else {
+        // Vérifier si un utilisateur était sauvegardé localement
+        const savedUid = localStorage.getItem('NexFormation_current_user');
+        if (savedUid) {
+          localStorage.removeItem('NexFormation_current_user');
+        }
+        // Rediriger vers login
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
 </body>
 </html>
