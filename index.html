@@ -887,6 +887,88 @@
       background: linear-gradient(90deg, transparent, rgba(183, 110, 255, 0.12), transparent);
       margin-bottom: 44px;
     }
+
+    /* ===== BADGE BEST-SELLER ===== */
+    .bestseller-badge {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: linear-gradient(135deg, #FFD166, #FF9A3C);
+      color: #000;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 3;
+      box-shadow: 0 2px 10px rgba(255, 166, 0, 0.35);
+      animation: badgePulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 2px 10px rgba(255, 166, 0, 0.35); }
+      50% { box-shadow: 0 2px 20px rgba(255, 166, 0, 0.65); }
+    }
+
+    /* ===== EFFETS FLUIDES ===== */
+
+    /* Smooth scroll global */
+    html { scroll-behavior: smooth; }
+
+    /* Transition douce sur tous les éléments interactifs */
+    a, button, .formation-card, .stat-card, .social-link, .user-profile {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Shimmer au hover sur les cartes formation */
+    .formation-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(183, 110, 255, 0.04), transparent);
+      transition: left 0.6s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .formation-card:hover::after { left: 140%; }
+
+    /* Lift + glow au hover des cartes */
+    .formation-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(183, 110, 255, 0.22);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 30px rgba(183, 110, 255, 0.08);
+    }
+
+    /* Stat cards hover */
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(183, 110, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(183, 110, 255, 0.06);
+    }
+
+    /* Animation d'entrée scroll reveal (init state) */
+    .formation-card, .stat-card, .about-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Avatar pulsation subtile */
+    .user-avatar {
+      animation: avatarPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes avatarPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(183, 110, 255, 0); }
+      50% { box-shadow: 0 0 0 3px rgba(183, 110, 255, 0.2); }
+    }
+
+    /* Logo glow pulsation */
+    .logo-icon {
+      animation: nexusGlow 3.5s ease-in-out infinite;
+    }
   </style>
 </head>
 <body>
@@ -916,9 +998,6 @@
         <div class="user-avatar" id="userAvatar">U</div>
         <span class="user-name" id="userName">Utilisateur</span>
       </a>
-      <div class="logout-btn" id="logoutBtn" onclick="window.handleLogout()">
-        <i class="fas fa-sign-out-alt"></i>
-      </div>
     </div>
   </header>
 
@@ -931,7 +1010,7 @@
       </div>
       
       <h1 class="hero-title">
-        Maîtrisez l'<span>IA</span> et le <span>Business</span>
+        Développez vos <span>compétences</span> et votre <span>mindset</span>
       </h1>
       
       <p class="hero-description">
@@ -951,7 +1030,7 @@
         <div class="stat-icon">
           <i class="fas fa-users"></i>
         </div>
-        <div class="stat-value" id="studentsCount">0</div>
+        <div class="stat-value" id="studentsCount">127</div>
         <div class="stat-label">Étudiants</div>
       </div>
     </div>
@@ -1042,7 +1121,7 @@
     // ============================================
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBWTEWAQjQuDzY26BghtTcqfdyVEmQZXe8",
@@ -1078,7 +1157,7 @@
         isFree: true,
         image: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         page: "formation1.html",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        videoUrl: ""
       },
       {
         id: "formation2",
@@ -1095,29 +1174,31 @@
       },
       {
         id: "formation3",
-        title: "Créer un site web avec l'IA",
-        description: "Apprenez à utiliser l'intelligence artificielle pour créer des sites web professionnels sans coder.",
-        category: "🤖 IA & Web",
-        duration: "3h45",
-        rating: "4.8",
-        reviews: 42,
-        price: 2500,
+        title: "Marketing Digital — De 0 à Expert",
+        description: "Maîtrisez les réseaux sociaux, le SEO, la publicité en ligne et construisez une audience qui achète.",
+        category: "📣 Marketing Digital",
+        duration: "6h30",
+        rating: "4.9",
+        reviews: 1840,
+        price: 7500,
         isFree: false,
-        image: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        page: "formation3.html"
+        image: "https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        page: "formation3.html",
+        badge: "🔥 Best-seller"
       },
       {
         id: "formation4",
-        title: "Trading pour débutants",
-        description: "Découvrez les bases du trading, l'analyse de marché et comment gérer vos investissements efficacement.",
-        category: "📊 Trading",
-        duration: "4h00",
-        rating: "4.7",
-        reviews: 56,
-        price: 10000,
+        title: "Développement Personnel & Mindset de Gagnant",
+        description: "Transformez votre état d'esprit, éliminez les croyances limitantes et construisez la vie que vous méritez.",
+        category: "🧠 Mindset & Succès",
+        duration: "4h45",
+        rating: "4.8",
+        reviews: 3200,
+        price: 5000,
         isFree: false,
-        image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        page: "formation4.html"
+        image: "https://images.pexels.com/photos/3755755/pexels-photo-3755755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        page: "formation4.html",
+        badge: "⭐ Top mondial"
       }
     ];
 
@@ -1158,12 +1239,16 @@
         return;
       }
 
-      // Toutes les formations redirigent vers leur page
-      // (gratuite = accès direct, payante = page infos + saisie du code)
+      if (isFree) {
+        showNotification('Acces gratuit', 'Demarrage de la formation...', 'success');
+      } else {
+        showNotification('Formation Premium', 'Redirection vers la formation...', 'info');
+      }
+
       if (page) {
-        window.location.href = page;
+        setTimeout(function() { window.location.href = page; }, 900);
       } else if (videoUrl) {
-        window.open(videoUrl, '_blank');
+        setTimeout(function() { window.open(videoUrl, '_blank'); }, 900);
       }
     };
 
@@ -1176,30 +1261,31 @@
         return;
       }
 
-      grid.innerHTML = formationsList.map(formation => `
-        <div class="formation-card" onclick="window.startCourse('${formation.id}', ${formation.isFree}, '${formation.page || ''}', '${formation.videoUrl || ''}')">
-          <div class="formation-image-wrap">
-            ${!formation.isFree ? '<div class="lock-badge"><i class="fas fa-lock"></i> PREMIUM</div>' : ''}
-            <img src="${formation.image}" alt="${formation.title}" class="formation-image" loading="lazy">
-          </div>
-          <div class="formation-content">
-            <span class="formation-category">${formation.category}</span>
-            <h3 class="formation-title">${formation.title}</h3>
-            <p class="formation-description">${formation.description}</p>
-            <div class="formation-meta">
-              <span><i class="far fa-clock"></i> ${formation.duration}</span>
-              <span><i class="fas fa-signal"></i> ${formation.rating} (${formation.reviews})</span>
-            </div>
-            <div class="formation-price ${formation.isFree ? 'free' : ''}">
-              ${formation.isFree ? '🎁 GRATUIT' : `🔑 ${formation.price.toLocaleString('fr-FR')} FCFA`}
-            </div>
-            <button class="formation-btn ${formation.isFree ? 'free' : ''}">
-              <i class="fas ${formation.isFree ? 'fa-play' : 'fa-unlock-alt'}"></i>
-              ${formation.isFree ? 'Commencer gratuitement' : 'Accéder à la formation'}
-            </button>
-          </div>
-        </div>
-      `).join('');
+      grid.innerHTML = formationsList.map(function(formation, index) {
+        return '<div class="formation-card" style="animation-delay: ' + (index * 0.08) + 's" onclick="window.startCourse(\'' + formation.id + '\', ' + formation.isFree + ', \'' + (formation.page || '') + '\', \'' + (formation.videoUrl || '') + '\')">' +
+          '<div class="formation-image-wrap">' +
+          (!formation.isFree ? '<div class="lock-badge"><i class="fas fa-lock"></i> PREMIUM</div>' : '') +
+          (formation.badge ? '<div class="bestseller-badge">' + formation.badge + '</div>' : '') +
+          '<img src="' + formation.image + '" alt="' + formation.title + '" class="formation-image" loading="lazy">' +
+          '</div>' +
+          '<div class="formation-content">' +
+          '<span class="formation-category">' + formation.category + '</span>' +
+          '<h3 class="formation-title">' + formation.title + '</h3>' +
+          '<p class="formation-description">' + formation.description + '</p>' +
+          '<div class="formation-meta">' +
+          '<span><i class="far fa-clock"></i> ' + formation.duration + '</span>' +
+          '<span><i class="fas fa-star" style="color:#FFD166"></i> ' + formation.rating + ' (' + formation.reviews.toLocaleString('fr-FR') + ')</span>' +
+          '</div>' +
+          '<div class="formation-price ' + (formation.isFree ? 'free' : '') + '">' +
+          (formation.isFree ? '🎁 GRATUIT' : '🔑 ' + formation.price.toLocaleString('fr-FR') + ' FCFA') +
+          '</div>' +
+          '<button class="formation-btn ' + (formation.isFree ? 'free' : '') + '">' +
+          '<i class="fas ' + (formation.isFree ? 'fa-play' : 'fa-unlock-alt') + '"></i>' +
+          (formation.isFree ? 'Commencer gratuitement' : 'Voir la formation') +
+          '</button>' +
+          '</div>' +
+          '</div>';
+      }).join('');
     }
 
     async function updateUserUI() {
@@ -1269,48 +1355,53 @@
       try {
         await signOut(auth);
         localStorage.removeItem('NexFormation_current_user');
-        showNotification('Déconnexion', 'À bientôt sur NexFormation !', 'success');
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        showNotification('Deconnexion', 'A bientot sur NexFormation !', 'success');
+        setTimeout(function() { window.location.reload(); }, 1500);
       } catch (error) {
         console.error(error);
-        showNotification('Erreur', 'Erreur lors de la déconnexion', 'error');
       }
     };
 
     // ============================================
     // AUTHENTIFICATION FIREBASE
     // ============================================
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async function(user) {
       if (user) {
         currentUser = user;
         localStorage.setItem('NexFormation_current_user', user.uid);
         await loadUserData();
         renderFormations();
-        await updateStudentsCount();
         updateUserUI();
       } else {
-        const savedUid = localStorage.getItem('NexFormation_current_user');
-        if (savedUid) {
-          localStorage.removeItem('NexFormation_current_user');
-        }
+        localStorage.removeItem('NexFormation_current_user');
         currentUser = null;
         userData = null;
         renderFormations();
         updateUserUI();
-        updateStudentsCount();
       }
     });
 
     // ============================================
     // INITIALISATION
     // ============================================
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
       renderFormations();
-      updateStudentsCount();
       const totalCoursesEl = document.getElementById('totalCourses');
       if (totalCoursesEl) totalCoursesEl.textContent = formationsList.length;
+
+      // Intersection Observer pour animer les cartes à l'entrée dans le viewport
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.stat-card, .formation-card, .about-section').forEach(function(el) {
+        observer.observe(el);
+      });
     });
   </script>
 </body>

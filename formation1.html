@@ -2,253 +2,751 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Formation Gratuite - Gagner de l'argent avec son téléphone | EarnZone</title>
+  <title>Formation 1 — Gagne ton premier cash avec ton téléphone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #000000; color: #ffffff; -webkit-font-smoothing: antialiased; }
+    :root {
+      --primary: #B76EFF;
+      --primary-dark: #8B3FE8;
+      --primary-light: #D4A1FF;
+      --bg-dark: #030305;
+      --text-light: #FFFFFF;
+      --text-dim: #8B90A8;
+      --card-bg: rgba(12,12,22,0.88);
+      --card-border: rgba(183,110,255,0.09);
+      --success: #2EE89A;
+      --danger: #FF4D6D;
+      --warning: #FFD166;
+      --glass-bg: rgba(183,110,255,0.05);
+      --glass-border: rgba(183,110,255,0.1);
+      --tr: all 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; min-height:100vh; overflow-x:hidden; scroll-behavior:smooth; }
+
+    body {
+      font-family:'Inter',sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size:14px; line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body::after {
+      content:''; position:fixed; top:0; left:0; width:100%; height:100%;
+      z-index:9999; pointer-events:none; opacity:0.03;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat:repeat; background-size:128px;
+    }
+
     .gradient-bg {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-      background: radial-gradient(ellipse at 15% 25%, rgba(0,255,204,0.06) 0%, transparent 50%),
-                  radial-gradient(ellipse at 85% 65%, rgba(0,255,204,0.04) 0%, transparent 50%),
-                  #000000;
+      position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
+      background:
+        radial-gradient(ellipse 65% 55% at 10% 15%, rgba(139,63,232,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(183,110,255,0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #030305 0%, #06061A 50%, #030305 100%);
     }
-    .noise {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      opacity: 0.05; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4xIiAvPjwvc3ZnPg==');
+
+    .orb {
+      position:fixed; border-radius:50%; filter:blur(80px);
+      z-index:-1; pointer-events:none; animation:orbFloat 8s ease-in-out infinite;
     }
+    .orb-1 { width:280px; height:280px; background:radial-gradient(circle,rgba(139,63,232,0.16),transparent 70%); top:-90px; left:-90px; }
+    .orb-2 { width:220px; height:220px; background:radial-gradient(circle,rgba(183,110,255,0.1),transparent 70%); bottom:15%; right:-70px; animation-delay:-4s; }
+
+    @keyframes orbFloat {
+      0%,100%{transform:translate(0,0) scale(1);}
+      33%{transform:translate(18px,-18px) scale(1.04);}
+      66%{transform:translate(-14px,14px) scale(0.96);}
+    }
+
+    /* HEADER */
     .header {
-      display: flex; justify-content: space-between; align-items: center; padding: 16px 5%;
-      background: rgba(0,0,0,0.96); backdrop-filter: blur(30px);
-      border-bottom: 1px solid rgba(255,255,255,0.03); position: sticky; top: 0; z-index: 100;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:13px 5%; background:rgba(3,3,5,0.93); backdrop-filter:blur(24px);
+      position:sticky; top:0; z-index:100;
+      border-bottom:1px solid rgba(183,110,255,0.07);
     }
-    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
     .logo-icon {
-      width: 36px; height: 36px; background: linear-gradient(135deg, #00ffcc, #9d4edd);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: black; transform: rotate(45deg);
+      font-size:26px; font-weight:900;
+      background:linear-gradient(135deg,#D4A1FF,#B76EFF,#8B3FE8);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      animation:nexusGlow 3.5s ease-in-out infinite;
     }
-    .logo-icon i { transform: rotate(-45deg); }
-    .logo-text {
-      font-size: 18px; font-weight: 700;
-      background: linear-gradient(135deg, #fff, #00ffcc);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    @keyframes nexusGlow {
+      0%,100%{filter:brightness(1);}
+      50%{filter:brightness(1.35) drop-shadow(0 0 10px rgba(183,110,255,0.6));}
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
-    
-    /* Hero section - version gratuite */
-    .hero-formation {
-      background: rgba(10,10,10,0.8); border: 1px solid rgba(0,255,204,0.25);
-      border-radius: 32px; padding: 24px; margin-bottom: 30px; backdrop-filter: blur(12px);
+    .logo-text { font-size:16px; font-weight:700; text-transform:uppercase; }
+    .logo-text span { color:var(--primary); }
+
+    .back-btn {
+      width:38px; height:38px; background:var(--glass-bg); border:1px solid var(--glass-border);
+      border-radius:11px; display:flex; align-items:center; justify-content:center;
+      color:var(--text-dim); font-size:15px; text-decoration:none; transition:var(--tr);
     }
-    .badge-category {
-      display: inline-block; background: rgba(0,255,204,0.15);
-      border: 1px solid rgba(0,255,204,0.4); color: #00ffcc;
-      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 30px; margin-bottom: 16px;
+    .back-btn:hover { color:var(--primary); border-color:rgba(183,110,255,0.25); }
+    .back-btn:active { transform:scale(0.93); }
+
+    /* CONTAINER */
+    .container { max-width:520px; margin:0 auto; padding:22px 16px 60px; }
+
+    /* HERO FORMATION */
+    .formation-hero {
+      border-radius:26px; overflow:hidden; margin-bottom:20px;
+      position:relative;
+      animation: cardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
     }
-    .free-badge {
-      background: rgba(76, 255, 76, 0.15); border-color: #4cff4c; color: #4cff4c;
+
+    @keyframes cardIn {
+      from{opacity:0; transform:translateY(18px);}
+      to{opacity:1; transform:translateY(0);}
     }
-    .hero-formation h1 { font-size: 28px; font-weight: 800; line-height: 1.3; margin-bottom: 16px; }
-    .price-tag-free {
-      font-size: 28px; font-weight: 800; color: #4cff4c; margin: 16px 0 12px;
+
+    .hero-image {
+      width:100%; height:210px; object-fit:cover; display:block;
+      filter:brightness(0.65) saturate(0.8);
     }
-    .price-tag-free small { font-size: 14px; font-weight: 400; color: #6b7a8d; }
-    .description { color: #b0c4de; line-height: 1.6; margin-bottom: 20px; }
-    
-    /* Accès direct (pas de mot de passe) */
-    .direct-access {
-      background: linear-gradient(135deg, rgba(0,255,204,0.08), rgba(76,255,76,0.05));
-      border: 1px solid rgba(0,255,204,0.2);
-      border-radius: 28px; padding: 20px; margin: 20px 0; text-align: center;
+
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(3,3,5,0.95) 0%, rgba(3,3,5,0.3) 60%, transparent 100%);
+      display:flex; flex-direction:column; justify-content:flex-end; padding:20px;
     }
-    .direct-access i { font-size: 40px; color: #4cff4c; margin-bottom: 12px; }
-    .direct-access h3 { font-size: 20px; margin-bottom: 8px; }
-    .direct-access p { color: #8e9eae; font-size: 14px; }
-    
-    /* PDF Viewer */
+
+    .free-tag {
+      display:inline-flex; align-items:center; gap:6px;
+      background:linear-gradient(135deg, rgba(46,232,154,0.2), rgba(46,232,154,0.1));
+      border:1px solid rgba(46,232,154,0.3); color:var(--success);
+      padding:5px 14px; border-radius:100px; font-size:12px; font-weight:700;
+      margin-bottom:10px; width:fit-content;
+      animation:freePulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes freePulse {
+      0%,100%{box-shadow:0 0 0 0 rgba(46,232,154,0);}
+      50%{box-shadow:0 0 0 4px rgba(46,232,154,0.1);}
+    }
+
+    .hero-title {
+      font-size:21px; font-weight:800; line-height:1.2; margin-bottom:10px;
+      text-shadow:0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero-meta {
+      display:flex; gap:14px; flex-wrap:wrap;
+    }
+
+    .meta-item {
+      display:flex; align-items:center; gap:5px;
+      font-size:12px; color:rgba(255,255,255,0.7);
+    }
+    .meta-item i { color:var(--primary); font-size:11px; }
+
+    /* CARDS */
+    .card {
+      background:var(--card-bg); backdrop-filter:blur(14px);
+      border:1px solid var(--card-border); border-radius:22px;
+      padding:22px 18px; margin-bottom:14px; position:relative; overflow:hidden;
+      animation:cardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(183,110,255,0.35),transparent);
+    }
+
+    .card-title {
+      font-size:16px; font-weight:700; margin-bottom:14px;
+      display:flex; align-items:center; gap:9px;
+    }
+
+    .card-title i { color:var(--primary); font-size:15px; }
+
+    /* DESCRIPTION */
+    .desc-text {
+      color:rgba(255,255,255,0.8); font-size:14px; line-height:1.7; margin-bottom:0;
+    }
+
+    /* CE QU'ON APPREND */
+    .learn-list {
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+    }
+
+    .learn-item {
+      display:flex; align-items:flex-start; gap:11px;
+      font-size:14px; color:rgba(255,255,255,0.85); line-height:1.5;
+    }
+
+    .learn-icon {
+      width:22px; height:22px; min-width:22px; border-radius:6px;
+      background:rgba(46,232,154,0.12); border:1px solid rgba(46,232,154,0.25);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--success); font-size:10px; margin-top:1px;
+    }
+
+    /* STATS MINI */
+    .stats-row {
+      display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
+      margin-bottom:0;
+    }
+
+    .stat-mini {
+      background:rgba(183,110,255,0.05); border:1px solid rgba(183,110,255,0.1);
+      border-radius:14px; padding:13px 10px; text-align:center;
+    }
+
+    .stat-mini-val {
+      font-size:18px; font-weight:800;
+      background:linear-gradient(135deg,var(--primary-light),var(--primary));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      margin-bottom:3px;
+    }
+
+    .stat-mini-lbl { font-size:11px; color:var(--text-dim); }
+
+    /* PDF VIEWER */
+    .pdf-btn {
+      width:100%; padding:16px; border:none; border-radius:16px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      color:white; font-size:15px; font-weight:700; font-family:'Inter',sans-serif;
+      cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      box-shadow:0 6px 24px rgba(139,63,232,0.35); margin-bottom:12px;
+      position:relative; overflow:hidden;
+    }
+
+    .pdf-btn::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);
+      opacity:0; transition:opacity 0.3s;
+    }
+    .pdf-btn:hover::before { opacity:1; }
+    .pdf-btn:active { transform:scale(0.98); }
+
+    /* PDF CONTAINER */
     .pdf-container {
-      margin-top: 25px; background: #0a0a0c;
-      border-radius: 24px; border: 1px solid rgba(0,255,204,0.3); overflow: hidden;
-      animation: fadeInUp 0.5s ease;
+      display:none; width:100%; border-radius:18px; overflow:hidden;
+      border:1px solid rgba(183,110,255,0.15); margin-top:12px;
+      animation:cardIn 0.4s ease both;
     }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .pdf-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 20px; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(0,255,204,0.2);
-      flex-wrap: wrap; gap: 15px;
+
+    .pdf-container.open { display:block; }
+
+    .pdf-toolbar {
+      background:rgba(8,8,20,0.95); backdrop-filter:blur(14px);
+      padding:12px 16px; display:flex; align-items:center;
+      justify-content:space-between; border-bottom:1px solid rgba(183,110,255,0.1);
     }
-    .pdf-header h2 { font-size: 18px; display: flex; align-items: center; gap: 10px; }
-    .download-btn {
-      background: rgba(0,255,204,0.1); border: 1px solid #00ffcc; border-radius: 40px;
-      padding: 10px 20px; font-weight: 600; color: #00ffcc; text-decoration: none;
-      font-size: 14px; transition: 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+
+    .pdf-toolbar-title {
+      font-size:13px; font-weight:600; color:var(--text-dim);
+      display:flex; align-items:center; gap:8px;
     }
-    .download-btn:hover { background: #00ffcc; color: black; }
-    .pdf-viewer {
-      width: 100%; height: 600px; border: none; background: #f1f1f1;
+
+    .pdf-toolbar-title i { color:var(--primary); }
+
+    .pdf-toolbar-actions { display:flex; gap:8px; }
+
+    .pdf-action-btn {
+      background:var(--glass-bg); border:1px solid var(--glass-border);
+      border-radius:9px; padding:7px 12px;
+      color:var(--text-dim); font-size:12px; cursor:pointer;
+      transition:var(--tr); display:flex; align-items:center; gap:6px;
+      font-family:'Inter',sans-serif;
     }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 8px; color: #00ffcc;
-      text-decoration: none; margin-bottom: 20px; font-weight: 500;
+
+    .pdf-action-btn:hover { color:var(--primary); border-color:rgba(183,110,255,0.3); }
+    .pdf-action-btn:active { transform:scale(0.95); }
+
+    .pdf-frame-wrap {
+      background:#111118; width:100%; height:75vh;
+      display:flex; align-items:center; justify-content:center;
     }
-    .footer { text-align: center; padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.03); margin-top: 40px; color: #6b7a8d; font-size: 12px; }
+
+    .pdf-frame {
+      width:100%; height:100%; border:none; display:block;
+    }
+
+    /* Fallback si iframe bloqué */
+    .pdf-fallback {
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+      gap:16px; padding:30px; text-align:center;
+    }
+
+    .pdf-fallback i { font-size:44px; color:var(--primary); opacity:0.7; }
+    .pdf-fallback p { color:var(--text-dim); font-size:13px; line-height:1.6; }
+
+    .pdf-dl-btn {
+      padding:13px 24px; background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      color:white; border:none; border-radius:14px; font-size:14px; font-weight:700;
+      font-family:'Inter',sans-serif; cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; gap:8px;
+      text-decoration:none;
+    }
+    .pdf-dl-btn:active { transform:scale(0.97); }
+
+    /* PAIEMENT SECTION */
+    .payment-section {
+      border-radius:22px; overflow:hidden; margin-bottom:14px;
+      background:var(--card-bg); border:1px solid var(--card-border);
+      animation:cardIn 0.5s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .payment-header {
+      padding:18px 18px 0;
+    }
+
+    .payment-title {
+      font-size:16px; font-weight:700; margin-bottom:4px;
+      display:flex; align-items:center; gap:9px;
+    }
+    .payment-title i { color:var(--warning); }
+
+    .payment-subtitle { font-size:13px; color:var(--text-dim); margin-bottom:16px; }
+
+    .payment-methods {
+      display:flex; flex-direction:column; gap:0;
+    }
+
+    .payment-method {
+      display:flex; align-items:center; gap:14px;
+      padding:15px 18px; border-top:1px solid rgba(183,110,255,0.05);
+      transition:var(--tr); cursor:pointer; text-decoration:none; color:inherit;
+    }
+
+    .payment-method:first-child { border-top:none; }
+    .payment-method:active { background:rgba(183,110,255,0.04); }
+
+    .pm-icon {
+      width:42px; height:42px; border-radius:12px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:900;
+    }
+
+    .pm-icon.wave { background:rgba(30,120,255,0.12); border:1px solid rgba(30,120,255,0.2); }
+    .pm-icon.mtn { background:rgba(255,209,0,0.12); border:1px solid rgba(255,209,0,0.2); }
+    .pm-icon.amana { background:rgba(255,140,0,0.12); border:1px solid rgba(255,140,0,0.2); }
+
+    .pm-content { flex:1; }
+    .pm-name { font-size:14px; font-weight:600; margin-bottom:2px; }
+    .pm-detail { font-size:12px; color:var(--text-dim); }
+
+    .pm-arrow { color:rgba(139,144,168,0.4); font-size:13px; transition:var(--tr); }
+    .payment-method:active .pm-arrow { color:var(--primary); transform:translateX(2px); }
+
+    /* WhatsApp btn */
+    .whatsapp-btn {
+      width:100%; padding:15px; margin:14px 18px 18px;
+      width:calc(100% - 36px);
+      background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.25);
+      border-radius:16px; color:#25D366;
+      font-size:14px; font-weight:700; font-family:'Inter',sans-serif;
+      cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+    }
+    .whatsapp-btn:active { background:rgba(37,211,102,0.18); transform:scale(0.98); }
+
+    /* NOTIFICATION */
     .notification {
-      position: fixed; bottom: 20px; left: 16px; right: 16px; background: #0a0a0c;
-      backdrop-filter: blur(20px); border: 1px solid #4cff4c; border-radius: 16px;
-      padding: 14px 18px; display: flex; align-items: center; gap: 12px;
-      z-index: 1000; transform: translateY(200px); transition: transform 0.4s;
-      max-width: 400px; margin: 0 auto;
+      position:fixed; bottom:20px; left:16px; right:16px;
+      background:rgba(6,6,18,0.97); backdrop-filter:blur(20px);
+      border:1px solid var(--primary); border-radius:18px;
+      padding:13px 16px; display:flex; align-items:center; gap:13px;
+      z-index:1100; transform:translateY(120px);
+      transition:transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
     }
-    .notification.show { transform: translateY(0); }
+    .notification.show { transform:translateY(0); }
     .notification-icon {
-      width: 40px; height: 40px; background: linear-gradient(135deg, #4cff4c, #00cc44);
-      border-radius: 12px; display: flex; align-items: center; justify-content: center; color: black;
+      width:42px; height:42px; border-radius:14px; flex-shrink:0;
+      background:rgba(183,110,255,0.15); border:1px solid rgba(183,110,255,0.2);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--primary); font-size:18px;
     }
-    @media (max-width: 600px) {
-      .pdf-viewer { height: 450px; }
-      .hero-formation h1 { font-size: 22px; }
-    }
+    .notification-content h4 { font-size:14px; font-weight:700; margin-bottom:2px; }
+    .notification-content p { font-size:12px; color:var(--text-dim); }
+    .notification.error { border-color:var(--danger); }
+    .notification.error .notification-icon { background:var(--danger); color:white; border-color:transparent; }
+    .notification.success { border-color:var(--success); }
+    .notification.success .notification-icon { background:var(--success); color:black; border-color:transparent; }
   </style>
 </head>
 <body>
-<div class="gradient-bg"></div>
-<div class="noise"></div>
 
-<header class="header">
-  <a href="index.html" class="logo">
-    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
-    <div class="logo-text">EarnZone</div>
-  </a>
-  <div><a href="profil.html" style="color: white; text-decoration: none;"><i class="fas fa-user-circle"></i> Compte</a></div>
-</header>
+  <div class="gradient-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-<main class="container">
-  <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux formations</a>
-
-  <div class="hero-formation">
-    <span class="badge-category free-badge"><i class="fas fa-gift"></i> GRATUIT - 100% OFF</span>
-    <h1>💰 Gagne ton premier cash avec ton téléphone !</h1>
-    <div class="price-tag-free">🎁 GRATUIT <small>· Accès immédiat</small></div>
-    <p class="description">
-      Découvrez les meilleures méthodes pour gagner de l'argent rapidement avec votre smartphone, sans expérience ni investissement. 
-      Cette formation PDF vous montre des techniques concrètes, testées et approuvées par des milliers d'utilisateurs.
-    </p>
-    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <span><i class="far fa-clock"></i> 2h00 de contenu</span>
-      <span><i class="fas fa-file-pdf"></i> PDF complet</span>
-      <span><i class="fas fa-mobile-alt"></i> Compatible mobile</span>
-      <span><i class="fas fa-download"></i> Téléchargement inclus</span>
+  <div class="notification" id="notification">
+    <div class="notification-icon"><i class="fas fa-info"></i></div>
+    <div class="notification-content">
+      <h4 id="notifTitle">Notification</h4>
+      <p id="notifMsg">Message</p>
     </div>
   </div>
 
-  <!-- Message d'accès direct (pas de mot de passe) -->
-  <div class="direct-access">
-    <i class="fas fa-unlock-alt"></i>
-    <h3>✅ Accès gratuit et immédiat</h3>
-    <p>Cette formation est entièrement gratuite. Le PDF est disponible ci-dessous, aucun code n'est requis.</p>
-  </div>
+  <header class="header">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">N</div>
+      <div class="logo-text">NEX<span>FORMATION</span></div>
+    </a>
+    <a href="index.html" class="back-btn" title="Retour">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+  </header>
 
-  <!-- ZONE D'AFFICHAGE DU PDF (visible directement) -->
-  <div id="pdfContainer" class="pdf-container">
-    <div class="pdf-header">
-      <h2><i class="fas fa-file-pdf" style="color:#ff4d4d"></i> 📄 Formation : Gagner de l'argent avec son téléphone</h2>
-      <button id="downloadPdfBtn" class="download-btn"><i class="fas fa-download"></i> Télécharger le PDF</button>
+  <main class="container">
+
+    <!-- HERO -->
+    <div class="formation-hero">
+      <img
+        src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        alt="Formation 1" class="hero-image">
+      <div class="hero-overlay">
+        <div class="free-tag">
+          <i class="fas fa-gift"></i> GRATUIT — Accès immédiat
+        </div>
+        <h1 class="hero-title">Gagne ton premier cash avec ton téléphone</h1>
+        <div class="hero-meta">
+          <div class="meta-item"><i class="far fa-clock"></i> 2h00</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 4.9 (210 avis)</div>
+          <div class="meta-item"><i class="fas fa-users"></i> 210 étudiants</div>
+          <div class="meta-item"><i class="fas fa-file-pdf"></i> 1 PDF</div>
+        </div>
+      </div>
     </div>
-    <!-- Visualiseur PDF intégré -->
-    <iframe id="pdfViewer" class="pdf-viewer" src="" title="PDF de la formation gratuite"></iframe>
-  </div>
 
-  <div class="footer">
-    <p>© 2026 EarnZone - Formations gratuites pour réussir</p>
-  </div>
-</main>
+    <!-- DESCRIPTION -->
+    <div class="card" style="animation-delay:0.05s">
+      <div class="card-title">
+        <i class="fas fa-align-left"></i> À propos de cette formation
+      </div>
+      <p class="desc-text">
+        Tu as un smartphone et tu veux commencer à gagner de l'argent sans capital ? Cette formation est faite pour toi. On va voir ensemble les meilleures méthodes testées et prouvées pour générer tes premiers revenus directement depuis ton téléphone, que tu sois débutant ou non.
+        <br><br>
+        Pas de promesses vides — seulement des stratégies concrètes, applicables immédiatement, qui fonctionnent en Afrique francophone et partout dans le monde.
+      </p>
+    </div>
 
-<div id="notification" class="notification">
-  <div class="notification-icon"><i class="fas fa-check-circle"></i></div>
-  <div><strong id="notifTitle">Info</strong><br><span id="notifMsg">Message</span></div>
-</div>
+    <!-- CE QU'ON APPREND -->
+    <div class="card" style="animation-delay:0.1s">
+      <div class="card-title">
+        <i class="fas fa-graduation-cap"></i> Ce que tu vas apprendre
+      </div>
+      <ul class="learn-list">
+        <li class="learn-item">
+          <div class="learn-icon"><i class="fas fa-check"></i></div>
+          Les meilleures applications pour gagner de l'argent depuis ton téléphone
+        </li>
+        <li class="learn-item">
+          <div class="learn-icon"><i class="fas fa-check"></i></div>
+          Comment vendre des services sur les réseaux sociaux sans site web
+        </li>
+        <li class="learn-item">
+          <div class="learn-icon"><i class="fas fa-check"></i></div>
+          Les erreurs que font les débutants et comment les éviter
+        </li>
+        <li class="learn-item">
+          <div class="learn-icon"><i class="fas fa-check"></i></div>
+          Créer une source de revenus passive avec ton téléphone
+        </li>
+        <li class="learn-item">
+          <div class="learn-icon"><i class="fas fa-check"></i></div>
+          Stratégies pour passer de 0 à tes premiers 10 000 FCFA
+        </li>
+        <li class="learn-item">
+          <div class="learn-icon"><i class="fas fa-check"></i></div>
+          Plan d'action concret à appliquer dès aujourd'hui
+        </li>
+      </ul>
+    </div>
 
-<script>
-  // 📁 NOM DE TON FICHIER PDF POUR LA FORMATION GRATUITE
-  // Tu dois mettre ton fichier PDF dans le même dossier que cette page
-  // Renomme ton fichier PDF en "formation-gratuite-telephone.pdf" ou change le nom ci-dessous
-  const PDF_FILENAME = "formation-gratuite-telephone.pdf";
+    <!-- STATS -->
+    <div class="card" style="animation-delay:0.15s">
+      <div class="card-title">
+        <i class="fas fa-chart-bar"></i> Chiffres clés
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini">
+          <div class="stat-mini-val">2h</div>
+          <div class="stat-mini-lbl">Durée</div>
+        </div>
+        <div class="stat-mini">
+          <div class="stat-mini-val">4.9★</div>
+          <div class="stat-mini-lbl">Note</div>
+        </div>
+        <div class="stat-mini">
+          <div class="stat-mini-val">210</div>
+          <div class="stat-mini-lbl">Étudiants</div>
+        </div>
+      </div>
+    </div>
 
-  function showNotif(title, message, isSuccess = true) {
-    const notif = document.getElementById('notification');
-    const notifTitle = document.getElementById('notifTitle');
-    const notifMsg = document.getElementById('notifMsg');
-    const iconDiv = notif.querySelector('.notification-icon');
-    notifTitle.innerText = title;
-    notifMsg.innerText = message;
-    if (!isSuccess) {
-      iconDiv.style.background = "#ff4757";
-      iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
-      notif.style.borderColor = "#ff4757";
-    } else {
-      iconDiv.style.background = "linear-gradient(135deg, #4cff4c, #00cc44)";
-      iconDiv.innerHTML = '<i class="fas fa-check-circle"></i>';
-      notif.style.borderColor = "#4cff4c";
+    <!-- ACCÈS PDF -->
+    <div class="card" style="animation-delay:0.2s" id="pdfCard">
+      <div class="card-title">
+        <i class="fas fa-file-pdf"></i> Accéder au contenu PDF
+      </div>
+      <p style="color:var(--text-dim); font-size:13px; margin-bottom:16px;">
+        Cette formation est <strong style="color:var(--success)">100% gratuite</strong>. Clique sur le bouton pour lire ou télécharger le PDF de la formation.
+      </p>
+
+      <button class="pdf-btn" id="pdfOpenBtn" onclick="togglePDF()">
+        <i class="fas fa-book-open" id="pdfBtnIcon"></i>
+        <span id="pdfBtnText">Lire la formation PDF</span>
+      </button>
+
+      <!-- ======================================================
+           PDF INTÉGRÉ
+           ➡️  REMPLACE "TON_PDF.pdf" PAR LE NOM DE TON FICHIER
+           ➡️  Exemple : si ton fichier s'appelle "formation1.pdf"
+               → met formation1.pdf ICI et place le fichier dans
+                 le même dossier que tes fichiers HTML.
+           ====================================================== -->
+      <div class="pdf-container" id="pdfContainer">
+        <div class="pdf-toolbar">
+          <div class="pdf-toolbar-title">
+            <i class="fas fa-file-pdf"></i>
+            Gagne ton premier cash — Formation PDF
+          </div>
+          <div class="pdf-toolbar-actions">
+            <a class="pdf-action-btn" id="pdfDlBtn" href="TON_PDF.pdf" download="NexFormation-Formation1.pdf">
+              <i class="fas fa-download"></i> Télécharger
+            </a>
+            <button class="pdf-action-btn" onclick="togglePDF()">
+              <i class="fas fa-times"></i> Fermer
+            </button>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap">
+          <!-- L'iframe charge ton PDF directement -->
+          <iframe
+            id="pdfFrame"
+            class="pdf-frame"
+            src=""
+            title="Formation PDF">
+          </iframe>
+          <!-- Fallback si iframe bloqué sur mobile -->
+          <div class="pdf-fallback" id="pdfFallback">
+            <i class="fas fa-file-pdf"></i>
+            <p>Ton navigateur ne peut pas afficher le PDF directement.<br>Clique sur le bouton pour le télécharger.</p>
+            <a class="pdf-dl-btn" href="TON_PDF.pdf" download="NexFormation-Formation1.pdf">
+              <i class="fas fa-download"></i> Télécharger le PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION PAIEMENT (autres formations) -->
+    <div class="payment-section" style="animation-delay:0.25s">
+      <div class="payment-header">
+        <div class="payment-title">
+          <i class="fas fa-lock"></i> Accéder aux formations premium
+        </div>
+        <p class="payment-subtitle">
+          Effectue ton paiement puis envoie la preuve sur WhatsApp pour recevoir ton code d'accès.
+        </p>
+      </div>
+
+      <div class="payment-methods">
+
+        <div class="payment-method">
+          <div class="pm-icon wave">
+            <span style="color:#1E78FF;font-size:13px;font-weight:900">W</span>
+          </div>
+          <div class="pm-content">
+            <div class="pm-name">Wave</div>
+            <div class="pm-detail">Envoyer au +227 81 56 37 38</div>
+          </div>
+          <div class="pm-arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+
+        <div class="payment-method">
+          <div class="pm-icon mtn">
+            <span style="color:#FFD100;font-size:12px;font-weight:900">MTN</span>
+          </div>
+          <div class="pm-content">
+            <div class="pm-name">My Nita (MTN MoMo)</div>
+            <div class="pm-detail">Envoyer au +227 81 56 37 38</div>
+          </div>
+          <div class="pm-arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+
+        <div class="payment-method">
+          <div class="pm-icon amana">
+            <span style="color:#FF8C00;font-size:12px;font-weight:900">AM</span>
+          </div>
+          <div class="pm-content">
+            <div class="pm-name">AmanaTa</div>
+            <div class="pm-detail">Envoyer au +227 81 56 37 38</div>
+          </div>
+          <div class="pm-arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+
+      </div>
+
+      <button class="whatsapp-btn" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+        Confirmer mon paiement sur WhatsApp
+      </button>
+    </div>
+
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBWTEWAQjQuDzY26BghtTcqfdyVEmQZXe8",
+      authDomain: "nexformation-ebcc0.firebaseapp.com",
+      databaseURL: "https://nexformation-ebcc0-default-rtdb.firebaseio.com",
+      projectId: "nexformation-ebcc0",
+      storageBucket: "nexformation-ebcc0.firebasestorage.app",
+      messagingSenderId: "592625968577",
+      appId: "1:592625968577:web:53482aea0414983427bb40"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // ============================================
+    // NOM DE TON FICHIER PDF
+    // ➡️  Change "TON_PDF.pdf" par le vrai nom
+    //     de ton fichier, ex: "formation1.pdf"
+    // ============================================
+    const PDF_FILENAME = "TON_PDF.pdf";
+
+    let notifTimer = null;
+    let pdfOpen = false;
+
+    function showNotif(title, msg, type) {
+      type = type || 'info';
+      const notif = document.getElementById('notification');
+      document.getElementById('notifTitle').textContent = title;
+      document.getElementById('notifMsg').textContent = msg;
+      const icon = notif.querySelector('.notification-icon i');
+      notif.className = 'notification show';
+      if (type === 'error') { notif.classList.add('error'); icon.className = 'fas fa-exclamation-triangle'; }
+      else if (type === 'success') { notif.classList.add('success'); icon.className = 'fas fa-check-circle'; }
+      else { icon.className = 'fas fa-info'; }
+      if (notifTimer) clearTimeout(notifTimer);
+      notifTimer = setTimeout(function() { notif.classList.remove('show'); }, 3500);
     }
-    notif.classList.add('show');
-    setTimeout(() => notif.classList.remove('show'), 4000);
-  }
 
-  function downloadPDF() {
-    // Créer un lien de téléchargement direct vers le fichier PDF
-    const link = document.createElement('a');
-    link.href = PDF_FILENAME;
-    link.download = "EarnZone-Gagner-argent-telephone.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    showNotif("Téléchargement", "Le téléchargement du PDF a commencé.", true);
-  }
+    // ============================================
+    // MARQUER LA FORMATION COMME COMMENCÉE
+    // → profil.html lira cette valeur pour le compteur
+    // ============================================
+    function markFormationStarted(user) {
+      // localStorage (toujours disponible)
+      localStorage.setItem('NexFormation_started_formation1', 'true');
 
-  // Charger le PDF automatiquement au chargement de la page
-  function loadPDF() {
-    const pdfViewer = document.getElementById('pdfViewer');
-    pdfViewer.src = PDF_FILENAME;
-    
-    // Petite notification de bienvenue
-    setTimeout(() => {
-      showNotif("Formation gratuite", "Le PDF est prêt à être consulté ! 📖", true);
-    }, 800);
-  }
+      // Firestore si possible
+      if (user) {
+        try {
+          updateDoc(doc(db, "users", user.uid), {
+            courses: arrayUnion("formation1")
+          }).catch(function(e) {
+            console.warn("Firestore courses update skipped:", e.code);
+          });
+        } catch(e) {}
+      }
+    }
 
-  // Vérifier si le fichier PDF existe (optionnel)
-  function checkPDFExists() {
-    fetch(PDF_FILENAME, { method: 'HEAD' })
-      .then(response => {
-        if (!response.ok) {
-          console.warn("PDF non trouvé :", PDF_FILENAME);
-          showNotif("Attention", "Le fichier PDF est introuvable. Vérifiez qu'il est bien dans le dossier.", false);
+    // ============================================
+    // TOGGLE PDF
+    // ============================================
+    window.togglePDF = function() {
+      const container = document.getElementById('pdfContainer');
+      const btn = document.getElementById('pdfOpenBtn');
+      const btnIcon = document.getElementById('pdfBtnIcon');
+      const btnText = document.getElementById('pdfBtnText');
+      const frame = document.getElementById('pdfFrame');
+      const dlBtn = document.getElementById('pdfDlBtn');
+
+      pdfOpen = !pdfOpen;
+
+      if (pdfOpen) {
+        // Charge l'iframe avec le PDF
+        if (frame.src === '' || frame.src === window.location.href) {
+          frame.src = PDF_FILENAME;
         }
-      })
-      .catch(() => {
-        console.warn("Impossible de vérifier le PDF");
-      });
-  }
+        dlBtn.href = PDF_FILENAME;
 
-  // Protection de connexion (comme sur l'accueil)
-  (function() {
-    let userId = localStorage.getItem('NX_Money_current_user') || localStorage.getItem('earnzone_current_user');
-    if (!userId) {
-      window.location.href = 'login.html';
-    }
-  })();
+        container.classList.add('open');
+        btnIcon.className = 'fas fa-times';
+        btnText.textContent = 'Fermer le PDF';
+        btn.style.background = 'rgba(183,110,255,0.12)';
+        btn.style.boxShadow = 'none';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadPDF();
-    checkPDFExists();
-    
-    const downloadBtn = document.getElementById('downloadPdfBtn');
-    downloadBtn.addEventListener('click', downloadPDF);
-  });
-</script>
+        // Scroll vers le PDF
+        setTimeout(function() {
+          document.getElementById('pdfCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+
+        showNotif('Formation ouverte', 'Bonne lecture ! Tu peux aussi telecharger le PDF.', 'success');
+
+        // Vérifier si l'iframe se charge (fallback mobile)
+        setTimeout(function() {
+          try {
+            const frameDoc = frame.contentDocument || frame.contentWindow.document;
+            if (!frameDoc || frameDoc.body.innerHTML === '') {
+              document.getElementById('pdfFrame').style.display = 'none';
+              document.getElementById('pdfFallback').style.display = 'flex';
+            }
+          } catch(e) {
+            // Cross-origin = le PDF charge bien, pas d'erreur réelle
+          }
+        }, 3000);
+
+        // Marquer la formation comme commencée
+        markFormationStarted(window._currentUser || null);
+
+      } else {
+        container.classList.remove('open');
+        btnIcon.className = 'fas fa-book-open';
+        btnText.textContent = 'Lire la formation PDF';
+        btn.style.background = '';
+        btn.style.boxShadow = '';
+      }
+    };
+
+    // ============================================
+    // WHATSAPP
+    // ============================================
+    window.openWhatsApp = function() {
+      const msg = encodeURIComponent("Bonjour, je viens d effectuer mon paiement pour une formation NexFormation. Voici ma preuve de paiement :");
+      window.open("https://wa.me/22781563738?text=" + msg, '_blank');
+    };
+
+    // ============================================
+    // AUTH CHECK — redirect si pas connecté
+    // ============================================
+    onAuthStateChanged(auth, function(user) {
+      if (user) {
+        window._currentUser = user;
+      } else {
+        const saved = localStorage.getItem('NexFormation_current_user');
+        if (!saved) {
+          showNotif('Connexion requise', 'Connecte-toi pour acceder aux formations', 'error');
+          setTimeout(function() { window.location.href = 'login.html'; }, 2000);
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
