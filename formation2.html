@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Formation 2 — Lancer un business rentable avec 0 FCFA</title>
+  <title>Formation 2 — Comment lancer un business rentable avec 0 FCFA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -124,8 +124,8 @@
 
     .premium-tag {
       display:inline-flex; align-items:center; gap:6px;
-      background:linear-gradient(135deg, rgba(255,209,102,0.2), rgba(255,209,102,0.1));
-      border:1px solid rgba(255,209,102,0.4); color:var(--warning);
+      background:linear-gradient(135deg, rgba(255,77,109,0.2), rgba(255,77,109,0.1));
+      border:1px solid rgba(255,77,109,0.3); color:var(--danger);
       padding:5px 14px; border-radius:100px; font-size:12px; font-weight:700;
       margin-bottom:10px; width:fit-content;
     }
@@ -169,7 +169,6 @@
       color:rgba(255,255,255,0.8); font-size:14px; line-height:1.7; margin-bottom:0;
     }
 
-    /* CE QU'ON APPREND */
     .learn-list {
       list-style:none; display:flex; flex-direction:column; gap:10px;
     }
@@ -186,7 +185,6 @@
       color:var(--success); font-size:10px; margin-top:1px;
     }
 
-    /* STATS MINI */
     .stats-row {
       display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
       margin-bottom:0;
@@ -206,82 +204,58 @@
 
     .stat-mini-lbl { font-size:11px; color:var(--text-dim); }
 
-    /* SECTION MOT DE PASSE PREMIUM */
-    .password-section {
-      margin-bottom:14px;
-      background:linear-gradient(135deg, rgba(255,209,102,0.05), rgba(183,110,255,0.03));
-      border-radius:20px;
-      padding:4px;
-    }
-
-    .password-card {
-      background:var(--card-bg); backdrop-filter:blur(14px);
-      border-radius:18px; padding:20px;
-    }
-
-    .password-title {
-      display:flex; align-items:center; gap:10px;
-      font-size:15px; font-weight:700; margin-bottom:8px;
-    }
-    .password-title i { color:var(--warning); }
-
-    .password-desc {
-      font-size:13px; color:var(--text-dim); margin-bottom:16px;
-      line-height:1.5;
-    }
-
-    .password-highlight {
-      background:rgba(183,110,255,0.1);
-      border-left:3px solid var(--primary);
-      padding:12px; border-radius:12px;
-      margin-bottom:18px;
-      font-size:12px;
-    }
-
-    .password-input-group {
-      display:flex; flex-direction:column; gap:12px;
-      margin-bottom:12px;
-    }
-
-    .password-input {
-      width:100%;
-      padding:14px 16px;
-      background:rgba(0,0,0,0.3);
+    /* CODE ACCESS SECTION */
+    .code-access-card {
+      background:linear-gradient(135deg, rgba(183,110,255,0.08), rgba(139,63,232,0.04));
       border:1px solid rgba(183,110,255,0.2);
-      border-radius:14px;
+      border-radius:22px;
+      padding:20px 18px;
+      margin-bottom:14px;
+    }
+
+    .code-input-group {
+      display:flex; flex-direction:column; gap:12px;
+      margin:16px 0 8px;
+    }
+
+    .code-input {
+      background:rgba(0,0,0,0.6);
+      border:1px solid rgba(183,110,255,0.3);
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:16px;
+      font-family:'Inter',monospace;
       color:white;
-      font-family:'Inter',sans-serif;
-      font-size:14px;
       outline:none;
       transition:var(--tr);
+      text-align:center;
+      letter-spacing:2px;
     }
-    .password-input:focus {
+
+    .code-input:focus {
       border-color:var(--primary);
-      background:rgba(0,0,0,0.5);
+      box-shadow:0 0 0 2px rgba(183,110,255,0.2);
     }
 
     .unlock-btn {
       width:100%; padding:14px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
       border:none; border-radius:14px;
-      background:linear-gradient(135deg,var(--warning),#E6A817);
-      color:#1a1a2e;
-      font-size:14px; font-weight:800;
+      color:white; font-size:15px; font-weight:700;
       font-family:'Inter',sans-serif;
       cursor:pointer; transition:var(--tr);
       display:flex; align-items:center; justify-content:center; gap:8px;
     }
-    .unlock-btn:active { transform:scale(0.98); }
 
-    .unlock-success-msg {
-      background:rgba(46,232,154,0.12);
-      border:1px solid rgba(46,232,154,0.3);
-      border-radius:12px;
-      padding:12px;
-      text-align:center;
-      font-size:13px;
-      color:var(--success);
-      margin-top:12px;
+    .unlock-btn:active { transform:scale(0.98); }
+    .unlock-btn:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+    .code-hint {
+      font-size:12px; color:var(--text-dim); text-align:center;
+      margin-top:10px;
     }
+
+    .code-hint i { color:var(--warning); margin-right:5px; }
 
     /* PDF VIEWER */
     .pdf-btn {
@@ -291,15 +265,8 @@
       cursor:pointer; transition:var(--tr);
       display:flex; align-items:center; justify-content:center; gap:10px;
       box-shadow:0 6px 24px rgba(139,63,232,0.35); margin-bottom:12px;
-      position:relative; overflow:hidden;
     }
 
-    .pdf-btn::before {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);
-      opacity:0; transition:opacity 0.3s;
-    }
-    .pdf-btn:hover::before { opacity:1; }
     .pdf-btn:active { transform:scale(0.98); }
 
     .pdf-container {
@@ -314,7 +281,7 @@
       background:rgba(8,8,20,0.95); backdrop-filter:blur(14px);
       padding:12px 16px; display:flex; align-items:center;
       justify-content:space-between; border-bottom:1px solid rgba(183,110,255,0.1);
-      flex-wrap:wrap; gap:8px;
+      flex-wrap:wrap; gap:10px;
     }
 
     .pdf-toolbar-title {
@@ -322,20 +289,17 @@
       display:flex; align-items:center; gap:8px;
     }
 
-    .pdf-toolbar-title i { color:var(--primary); }
-
-    .pdf-toolbar-actions { display:flex; gap:8px; }
+    .pdf-toolbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
 
     .pdf-action-btn {
       background:var(--glass-bg); border:1px solid var(--glass-border);
       border-radius:9px; padding:7px 12px;
       color:var(--text-dim); font-size:12px; cursor:pointer;
       transition:var(--tr); display:flex; align-items:center; gap:6px;
-      font-family:'Inter',sans-serif; text-decoration:none;
+      font-family:'Inter',sans-serif;
     }
 
     .pdf-action-btn:hover { color:var(--primary); border-color:rgba(183,110,255,0.3); }
-    .pdf-action-btn:active { transform:scale(0.95); }
 
     .pdf-frame-wrap {
       background:#111118; width:100%; height:75vh;
@@ -366,31 +330,20 @@
     .payment-section {
       border-radius:22px; overflow:hidden; margin-bottom:14px;
       background:var(--card-bg); border:1px solid var(--card-border);
-      animation:cardIn 0.5s 0.1s cubic-bezier(0.22,1,0.36,1) both;
     }
 
-    .payment-header {
-      padding:18px 18px 0;
-    }
-
-    .payment-title {
-      font-size:16px; font-weight:700; margin-bottom:4px;
-      display:flex; align-items:center; gap:9px;
-    }
+    .payment-header { padding:18px 18px 0; }
+    .payment-title { font-size:16px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:9px; }
     .payment-title i { color:var(--warning); }
-
     .payment-subtitle { font-size:13px; color:var(--text-dim); margin-bottom:16px; }
 
-    .payment-methods {
-      display:flex; flex-direction:column; gap:0;
-    }
+    .payment-methods { display:flex; flex-direction:column; gap:0; }
 
     .payment-method {
       display:flex; align-items:center; gap:14px;
       padding:15px 18px; border-top:1px solid rgba(183,110,255,0.05);
       transition:var(--tr); cursor:pointer; text-decoration:none; color:inherit;
     }
-
     .payment-method:first-child { border-top:none; }
     .payment-method:active { background:rgba(183,110,255,0.04); }
 
@@ -399,7 +352,6 @@
       display:flex; align-items:center; justify-content:center;
       font-size:20px; font-weight:900;
     }
-
     .pm-icon.wave { background:rgba(30,120,255,0.12); border:1px solid rgba(30,120,255,0.2); }
     .pm-icon.mtn { background:rgba(255,209,0,0.12); border:1px solid rgba(255,209,0,0.2); }
     .pm-icon.amana { background:rgba(255,140,0,0.12); border:1px solid rgba(255,140,0,0.2); }
@@ -407,21 +359,19 @@
     .pm-content { flex:1; }
     .pm-name { font-size:14px; font-weight:600; margin-bottom:2px; }
     .pm-detail { font-size:12px; color:var(--text-dim); }
-
-    .pm-arrow { color:rgba(139,144,168,0.4); font-size:13px; transition:var(--tr); }
-    .payment-method:active .pm-arrow { color:var(--primary); transform:translateX(2px); }
+    .pm-arrow { color:rgba(139,144,168,0.4); font-size:13px; }
 
     .whatsapp-btn {
-      width:100%; padding:15px; margin:14px 18px 18px;
-      width:calc(100% - 36px);
+      width:calc(100% - 36px); margin:14px 18px 18px;
       background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.25);
       border-radius:16px; color:#25D366;
-      font-size:14px; font-weight:700; font-family:'Inter',sans-serif;
+      font-size:14px; font-weight:700; padding:15px;
       cursor:pointer; transition:var(--tr);
       display:flex; align-items:center; justify-content:center; gap:10px;
     }
     .whatsapp-btn:active { background:rgba(37,211,102,0.18); transform:scale(0.98); }
 
+    /* NOTIFICATION */
     .notification {
       position:fixed; bottom:20px; left:16px; right:16px;
       background:rgba(6,6,18,0.97); backdrop-filter:blur(20px);
@@ -433,7 +383,7 @@
     }
     .notification.show { transform:translateY(0); }
     .notification-icon {
-      width:42px; height:42px; border-radius:14px; flex-shrink:0;
+      width:42px; height:42px; border-radius:14px;
       background:rgba(183,110,255,0.15); border:1px solid rgba(183,110,255,0.2);
       display:flex; align-items:center; justify-content:center;
       color:var(--primary); font-size:18px;
@@ -441,9 +391,15 @@
     .notification-content h4 { font-size:14px; font-weight:700; margin-bottom:2px; }
     .notification-content p { font-size:12px; color:var(--text-dim); }
     .notification.error { border-color:var(--danger); }
-    .notification.error .notification-icon { background:var(--danger); color:white; border-color:transparent; }
+    .notification.error .notification-icon { background:var(--danger); color:white; }
     .notification.success { border-color:var(--success); }
-    .notification.success .notification-icon { background:var(--success); color:black; border-color:transparent; }
+    .notification.success .notification-icon { background:var(--success); color:black; }
+
+    /* LOCKED OVERLAY */
+    .pdf-locked {
+      text-align:center; padding:40px 20px;
+    }
+    .pdf-locked i { font-size:48px; color:var(--danger); margin-bottom:12px; opacity:0.7; }
   </style>
 </head>
 <body>
@@ -474,158 +430,112 @@
 
     <!-- HERO -->
     <div class="formation-hero">
-      <img
-        src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt="Formation Business" class="hero-image">
+      <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Formation Business" class="hero-image">
       <div class="hero-overlay">
         <div class="premium-tag">
-          <i class="fas fa-crown"></i> PREMIUM — 5 000 FCFA
+          <i class="fas fa-lock"></i> PREMIUM — Code d'accès requis
         </div>
         <h1 class="hero-title">Comment lancer un business rentable avec 0 FCFA</h1>
         <div class="hero-meta">
           <div class="meta-item"><i class="far fa-clock"></i> 5h15</div>
           <div class="meta-item"><i class="fas fa-star"></i> 4.9 (85 avis)</div>
-          <div class="meta-item"><i class="fas fa-users"></i> 127 étudiants</div>
-          <div class="meta-item"><i class="fas fa-file-pdf"></i> 1 PDF</div>
+          <div class="meta-item"><i class="fas fa-users"></i> 85 étudiants</div>
+          <div class="meta-item"><i class="fas fa-file-pdf"></i> 1 PDF + Guide</div>
         </div>
       </div>
     </div>
 
     <!-- DESCRIPTION -->
-    <div class="card" style="animation-delay:0.05s">
-      <div class="card-title">
-        <i class="fas fa-align-left"></i> À propos de cette formation
-      </div>
+    <div class="card">
+      <div class="card-title"><i class="fas fa-align-left"></i> À propos de cette formation</div>
       <p class="desc-text">
-        Tu veux créer ton entreprise mais tu n'as pas de capital ? Cette formation te montre le chemin. Découvre comment transformer une idée en business rentable, sans investissement initial, en utilisant ton téléphone et les ressources gratuites disponibles.
-        <br><br>
-        Méthodes concrètes, testées en Afrique francophone, pour passer de l'idée aux premiers bénéfices. Pas de théories inutiles — seulement ce qui fonctionne vraiment.
+        Tu veux créer ton entreprise mais tu n'as pas de capital ? Cette formation est faite pour toi. Découvre des modèles d'affaires testés qui te permettront de démarrer sans argent et de générer tes premiers bénéfices rapidement.<br><br>
+        Des études de cas réelles, des templates prêts à l'emploi et des stratégies concrètes pour passer de l'idée au premier client.
       </p>
     </div>
 
     <!-- CE QU'ON APPREND -->
-    <div class="card" style="animation-delay:0.1s">
-      <div class="card-title">
-        <i class="fas fa-graduation-cap"></i> Ce que tu vas apprendre
-      </div>
+    <div class="card">
+      <div class="card-title"><i class="fas fa-graduation-cap"></i> Ce que tu vas apprendre</div>
       <ul class="learn-list">
-        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Trouver une idée business viable sans argent</li>
-        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Valider ton idée avant d'investir (tests gratuits)</li>
-        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Comment financer ou lever des fonds avec ton téléphone</li>
-        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Utiliser les réseaux sociaux pour vendre sans boutique</li>
-        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Passer de 0 FCFA à 500 000 FCFA de chiffre d'affaires</li>
-        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Témoignages et erreurs à éviter absolument</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Les 7 business à lancer avec 0 FCFA en 2026</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Comment valider ton idée avant d'investir</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Techniques pour trouver tes premiers clients gratuitement</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Gérer son business sans apport financier initial</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Les erreurs fatales des débutants à éviter</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Plan d'action 30 jours pour ton premier bénéfice</li>
       </ul>
     </div>
 
-    <div class="card" style="animation-delay:0.15s">
-      <div class="card-title">
-        <i class="fas fa-chart-bar"></i> Chiffres clés
-      </div>
+    <!-- STATS -->
+    <div class="card">
+      <div class="card-title"><i class="fas fa-chart-bar"></i> Chiffres clés</div>
       <div class="stats-row">
         <div class="stat-mini"><div class="stat-mini-val">5h15</div><div class="stat-mini-lbl">Durée</div></div>
         <div class="stat-mini"><div class="stat-mini-val">4.9★</div><div class="stat-mini-lbl">Note</div></div>
-        <div class="stat-mini"><div class="stat-mini-val">127</div><div class="stat-mini-lbl">Étudiants</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">85</div><div class="stat-mini-lbl">Étudiants</div></div>
       </div>
     </div>
 
-    <!-- ACCÈS PREMIUM AVEC MOT DE PASSE -->
-    <div class="password-section" id="premiumSection">
-      <div class="password-card" id="passwordCard">
-        <div class="password-title">
-          <i class="fas fa-lock"></i> Accès premium — Déverrouiller le PDF
-        </div>
-        <p class="password-desc">
-          Cette formation premium est disponible après paiement. Le mot de passe te sera envoyé sur WhatsApp après validation de ton paiement.
-        </p>
-        <div class="password-highlight">
-          <i class="fas fa-info-circle" style="color:var(--warning); margin-right:8px;"></i>
-          Après ton paiement, contacte-nous sur WhatsApp pour recevoir ton code d'accès.
-        </div>
-        <div class="password-input-group" id="passwordInputGroup">
-          <input type="password" id="passwordInput" class="password-input" placeholder="Entrez votre mot de passe" autocomplete="off">
-          <button id="unlockBtn" class="unlock-btn">
-            <i class="fas fa-key"></i> Déverrouiller la formation
-          </button>
-        </div>
-        <div id="unlockMessage"></div>
-      </div>
-    </div>
-
-    <!-- CONTENU PDF (caché par défaut) -->
-    <div class="card" style="animation-delay:0.2s" id="pdfCard">
+    <!-- ACCÈS PDF AVEC CODE -->
+    <div class="code-access-card" id="pdfCard">
       <div class="card-title">
-        <i class="fas fa-file-pdf"></i> Contenu de la formation
+        <i class="fas fa-file-pdf"></i> Accéder au contenu PDF
       </div>
-      <p style="color:var(--text-dim); font-size:13px; margin-bottom:16px;" id="pdfLockMsg">
-        🔒 Cette formation est verrouillée. Déverrouille-la avec ton mot de passe ci-dessus.
+      <p style="color:var(--text-dim); font-size:13px; margin-bottom:16px;">
+        Cette formation est <strong style="color:var(--warning)">premium (5 000 FCFA)</strong>. Entre ton code d'accès à 8 caractères pour débloquer le PDF.
       </p>
 
-      <button class="pdf-btn" id="pdfOpenBtn" style="opacity:0.6; cursor:not-allowed;" disabled>
-        <i class="fas fa-lock"></i>
-        <span>Contenu verrouillé</span>
-      </button>
+     <!-- Zone de code -->
+      <div class="code-input-group" id="codeSection">
+        <input type="text" id="accessCode" class="code-input" placeholder="" maxlength="12" autocomplete="off">
+        <button class="unlock-btn" id="unlockBtn" onclick="verifyAccessCode()">
+          <i class="fas fa-key"></i> Débloquer le PDF
+        </button>
+        </div>
+      </div>
 
+      <!-- Bouton PDF (visible seulement si débloqué) -->
+      <div id="pdfButtonArea" style="display:none;">
+        <button class="pdf-btn" id="pdfOpenBtn" onclick="togglePDF()">
+          <i class="fas fa-book-open" id="pdfBtnIcon"></i>
+          <span id="pdfBtnText">Lire la formation PDF</span>
+        </button>
+      </div>
+
+      <!-- PDF CONTAINER -->
       <div class="pdf-container" id="pdfContainer">
         <div class="pdf-toolbar">
-          <div class="pdf-toolbar-title">
-            <i class="fas fa-file-pdf"></i>
-            Business 0 FCFA — Formation PDF
-          </div>
+          <div class="pdf-toolbar-title"><i class="fas fa-file-pdf"></i> Business rentable — Formation PDF</div>
           <div class="pdf-toolbar-actions">
-            <a class="pdf-action-btn" id="pdfDlBtn" href="#" download="formation2.pdf">
-              <i class="fas fa-download"></i> Télécharger
-            </a>
-            <button class="pdf-action-btn" onclick="togglePDF()">
-              <i class="fas fa-times"></i> Fermer
-            </button>
+            <a class="pdf-action-btn" id="pdfDlBtn" href="formation2.pdf" download="formation2.pdf"><i class="fas fa-download"></i> Télécharger</a>
+            <button class="pdf-action-btn" onclick="togglePDF()"><i class="fas fa-times"></i> Fermer</button>
           </div>
         </div>
         <div class="pdf-frame-wrap">
           <iframe id="pdfFrame" class="pdf-frame" src="" title="Formation PDF"></iframe>
           <div class="pdf-fallback" id="pdfFallback">
             <i class="fas fa-file-pdf"></i>
-            <p>Ton navigateur ne peut pas afficher le PDF directement.<br>Clique sur le bouton pour le télécharger.</p>
-            <a class="pdf-dl-btn" id="fallbackDlBtn" href="#" download="formation2.pdf">
-              <i class="fas fa-download"></i> Télécharger le PDF
-            </a>
+            <p>Ton navigateur ne peut pas afficher le PDF directement.<br>Clique pour télécharger.</p>
+            <a class="pdf-dl-btn" href="formation2.pdf" download="formation2.pdf"><i class="fas fa-download"></i> Télécharger le PDF</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION PAIEMENT -->
-    <div class="payment-section" style="animation-delay:0.25s">
+    <!-- PAIEMENT POUR OBTENIR LE CODE -->
+    <div class="payment-section">
       <div class="payment-header">
-        <div class="payment-title">
-          <i class="fas fa-lock"></i> Effectuer le paiement (5 000 FCFA)
-        </div>
-        <p class="payment-subtitle">
-          Effectue ton paiement puis envoie la preuve sur WhatsApp pour recevoir ton mot de passe.
-        </p>
+        <div class="payment-title"><i class="fas fa-lock"></i> Obtenir ton code d'accès</div>
+        <p class="payment-subtitle">Paye 5 000 FCFA via l'un de ces moyens, puis reçois ton code sur WhatsApp.</p>
       </div>
-
       <div class="payment-methods">
-        <div class="payment-method">
-          <div class="pm-icon wave"><span style="color:#1E78FF;font-size:13px;font-weight:900">W</span></div>
-          <div class="pm-content"><div class="pm-name">Wave</div><div class="pm-detail">Envoyer au +227 81 56 37 38</div></div>
-          <div class="pm-arrow"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="payment-method">
-          <div class="pm-icon mtn"><span style="color:#FFD100;font-size:12px;font-weight:900">MYN</span></div>
-          <div class="pm-content"><div class="pm-name">My Nita</div><div class="pm-detail">Envoyer au +227 81 56 37 38</div></div>
-          <div class="pm-arrow"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="payment-method">
-          <div class="pm-icon amana"><span style="color:#FF8C00;font-size:12px;font-weight:900">AM</span></div>
-          <div class="pm-content"><div class="pm-name">AmanaTa</div><div class="pm-detail">Envoyer au +227 81 56 37 38</div></div>
-          <div class="pm-arrow"><i class="fas fa-chevron-right"></i></div>
-        </div>
+        <div class="payment-method"><div class="pm-icon wave"><span style="color:#1E78FF;">W</span></div><div class="pm-content"><div class="pm-name">Wave</div><div class="pm-detail">+227 81 56 37 38</div></div><div class="pm-arrow"><i class="fas fa-chevron-right"></i></div></div>
+        <div class="payment-method"><div class="pm-icon mtn"><span style="color:#FFD100;">MyN</span></div><div class="pm-content"><div class="pm-name">My Nita</div><div class="pm-detail">+227 81 56 37 38</div></div><div class="pm-arrow"><i class="fas fa-chevron-right"></i></div></div>
+        <div class="payment-method"><div class="pm-icon amana"><span style="color:#FF8C00;">AM</span></div><div class="pm-content"><div class="pm-name">AmanaTa</div><div class="pm-detail">+227 81 56 37 38</div></div><div class="pm-arrow"><i class="fas fa-chevron-right"></i></div></div>
       </div>
-
-      <button class="whatsapp-btn" onclick="openWhatsApp()">
-        <i class="fab fa-whatsapp"></i>
-        Confirmer mon paiement sur WhatsApp
+      <button class="whatsapp-btn" onclick="openWhatsAppPayment()">
+        <i class="fab fa-whatsapp"></i> Contacter pour recevoir mon code
       </button>
     </div>
 
@@ -650,215 +560,117 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // ============================================
-    // CONFIGURATION MOT DE PASSE (MODIFIABLE)
-    // Contient chiffres + lettres + caractères spéciaux
-    // ============================================
-    const COURSE_PASSWORD = "NexBiz@2025#";
-    
-    // Nom du fichier PDF (à placer dans le même dossier)
     const PDF_FILENAME = "formation2.pdf";
-
+    const VALID_CODE = "NX-92";  // ← CODE D'ACCÈS OFFICIEL (lettres, chiffres, tiret)
+    let pdfUnlocked = false;
+    let currentUser = null;
     let notifTimer = null;
-    let pdfOpen = false;
-    let isUnlocked = false;
 
     function showNotif(title, msg, type) {
+      type = type || 'info';
       const notif = document.getElementById('notification');
       document.getElementById('notifTitle').textContent = title;
       document.getElementById('notifMsg').textContent = msg;
       const icon = notif.querySelector('.notification-icon i');
       notif.className = 'notification show';
-      if (type === 'error') {
-        notif.classList.add('error');
-        icon.className = 'fas fa-exclamation-triangle';
-      } else if (type === 'success') {
-        notif.classList.add('success');
-        icon.className = 'fas fa-check-circle';
-      } else {
-        icon.className = 'fas fa-info';
-      }
+      if (type === 'error') { notif.classList.add('error'); icon.className = 'fas fa-exclamation-triangle'; }
+      else if (type === 'success') { notif.classList.add('success'); icon.className = 'fas fa-check-circle'; }
+      else { icon.className = 'fas fa-info'; }
       if (notifTimer) clearTimeout(notifTimer);
       notifTimer = setTimeout(() => notif.classList.remove('show'), 3500);
     }
 
-    function markFormationStarted(user) {
-      localStorage.setItem('NexFormation_started_formation2', 'true');
+    function markFormationUnlocked(user) {
+      localStorage.setItem('NexFormation_unlocked_formation2', 'true');
       if (user) {
         try {
-          updateDoc(doc(db, "users", user.uid), {
-            courses: arrayUnion("formation2")
-          }).catch(() => console.warn("Firestore update skipped"));
+          updateDoc(doc(db, "users", user.uid), { unlockedCourses: arrayUnion("formation2") }).catch(e => console.warn("Firestore:", e.code));
         } catch(e) {}
       }
     }
 
-    // Déverrouillage du contenu
-    function unlockContent() {
-      if (isUnlocked) return true;
-      
-      isUnlocked = true;
-      localStorage.setItem('NexFormation_unlocked_formation2', 'true');
-      
-      // Mettre à jour l'interface
-      const lockMsg = document.getElementById('pdfLockMsg');
-      const pdfBtn = document.getElementById('pdfOpenBtn');
-      const passwordCard = document.getElementById('passwordCard');
-      const unlockMessageDiv = document.getElementById('unlockMessage');
-      
-      if (lockMsg) lockMsg.innerHTML = '✅ Formation déverrouillée ! Clique ci-dessous pour lire le PDF.';
-      if (pdfBtn) {
-        pdfBtn.disabled = false;
-        pdfBtn.style.opacity = '1';
-        pdfBtn.style.cursor = 'pointer';
-        pdfBtn.innerHTML = '<i class="fas fa-book-open"></i><span>Lire la formation PDF</span>';
-      }
-      
-      if (passwordCard) {
-        const successDiv = document.createElement('div');
-        successDiv.className = 'unlock-success-msg';
-        successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Formation déverrouillée ! Tu peux maintenant accéder au PDF.';
-        if (unlockMessageDiv) unlockMessageDiv.innerHTML = '';
-        passwordCard.parentElement.style.opacity = '0.7';
-        const inputGroup = document.getElementById('passwordInputGroup');
-        if (inputGroup) inputGroup.style.display = 'none';
-        if (!document.querySelector('.unlock-success-msg')) {
-          passwordCard.appendChild(successDiv);
-        }
-      }
-      
-      markFormationStarted(window._currentUser || null);
-      showNotif('✅ Formation débloquée', 'Tu peux maintenant lire le PDF !', 'success');
-      return true;
-    }
-
-    // Vérification du mot de passe
-    function verifyPassword() {
-      const input = document.getElementById('passwordInput');
-      if (!input) return;
-      
-      const password = input.value.trim();
-      if (!password) {
-        showNotif('Code requis', 'Veuillez entrer votre mot de passe', 'error');
+    window.verifyAccessCode = function() {
+      if (pdfUnlocked) {
+        showNotif('Déjà débloqué', 'Le PDF est déjà accessible.', 'success');
         return;
       }
-      
-      if (password === COURSE_PASSWORD) {
-        unlockContent();
+      const inputCode = document.getElementById('accessCode').value.trim();
+      if (inputCode === VALID_CODE) {
+        pdfUnlocked = true;
+        localStorage.setItem('formation2_unlocked', 'true');
+        markFormationUnlocked(currentUser);
+        document.getElementById('codeSection').style.display = 'none';
+        document.getElementById('pdfButtonArea').style.display = 'block';
+        showNotif('Accès accordé', 'PDF débloqué ! Tu peux maintenant lire la formation.', 'success');
       } else {
-        showNotif('Code incorrect', 'Le mot de passe que tu as entré est invalide. Vérifie et réessaie.', 'error');
-        const unlockMsgDiv = document.getElementById('unlockMessage');
-        if (unlockMsgDiv) {
-          unlockMsgDiv.innerHTML = '<div style="color:var(--danger); font-size:12px; margin-top:10px;"><i class="fas fa-times-circle"></i> Mot de passe incorrect</div>';
-          setTimeout(() => { if(unlockMsgDiv) unlockMsgDiv.innerHTML = ''; }, 3000);
-        }
+        showNotif('Code invalide', 'Le code que tu as entré n\'est pas valide. Vérifie ou contacte le support.', 'error');
+        document.getElementById('accessCode').value = '';
+        document.getElementById('accessCode').focus();
       }
-    }
+    };
 
-    // Toggle PDF (uniquement si débloqué)
     window.togglePDF = function() {
-      if (!isUnlocked) {
-        showNotif('Accès verrouillé', 'Déverrouille d\'abord la formation avec ton mot de passe', 'error');
+      if (!pdfUnlocked) {
+        showNotif('Accès verrouillé', 'Entre ton code d\'accès pour débloquer le PDF.', 'error');
         return;
       }
-      
       const container = document.getElementById('pdfContainer');
-      const btn = document.getElementById('pdfOpenBtn');
-      const btnIcon = btn?.querySelector('i');
-      const btnText = btn?.querySelector('span');
+      const btnIcon = document.getElementById('pdfBtnIcon');
+      const btnText = document.getElementById('pdfBtnText');
       const frame = document.getElementById('pdfFrame');
-      const dlBtn = document.getElementById('pdfDlBtn');
-      const fallbackDlBtn = document.getElementById('fallbackDlBtn');
-      
-      pdfOpen = !pdfOpen;
-      
-      if (pdfOpen) {
-        if (frame && (frame.src === '' || frame.src === window.location.href)) {
+      const isOpen = container.classList.contains('open');
+
+      if (!isOpen) {
+        if (frame.src === '' || frame.src === window.location.href) {
           frame.src = PDF_FILENAME;
         }
-        if (dlBtn) dlBtn.href = PDF_FILENAME;
-        if (fallbackDlBtn) fallbackDlBtn.href = PDF_FILENAME;
-        
         container.classList.add('open');
-        if (btnIcon) btnIcon.className = 'fas fa-times';
-        if (btnText) btnText.textContent = 'Fermer le PDF';
-        if (btn) btn.style.background = 'rgba(183,110,255,0.12)';
-        if (btn) btn.style.boxShadow = 'none';
-        
-        setTimeout(() => {
-          document.getElementById('pdfCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
-        
+        btnIcon.className = 'fas fa-times';
+        btnText.textContent = 'Fermer le PDF';
         setTimeout(() => {
           try {
-            const frameDoc = frame?.contentDocument || frame?.contentWindow?.document;
-            if ((!frameDoc || frameDoc.body?.innerHTML === '') && frame) {
-              frame.style.display = 'none';
-              const fallback = document.getElementById('pdfFallback');
-              if (fallback) fallback.style.display = 'flex';
+            const frameDoc = frame.contentDocument || frame.contentWindow.document;
+            if (!frameDoc || frameDoc.body.innerHTML === '') {
+              document.getElementById('pdfFrame').style.display = 'none';
+              document.getElementById('pdfFallback').style.display = 'flex';
             }
           } catch(e) {}
         }, 2000);
+        showNotif('PDF ouvert', 'Bonne formation !', 'success');
       } else {
         container.classList.remove('open');
-        if (btnIcon) btnIcon.className = 'fas fa-book-open';
-        if (btnText) btnText.textContent = 'Lire la formation PDF';
-        if (btn) btn.style.background = '';
-        if (btn) btn.style.boxShadow = '';
+        btnIcon.className = 'fas fa-book-open';
+        btnText.textContent = 'Lire la formation PDF';
       }
     };
 
-    window.openWhatsApp = function() {
-      const msg = encodeURIComponent("Bonjour, j'ai effectué mon paiement de 5000 FCFA pour la formation 'Lancer un business rentable avec 0 FCFA'. Veuillez me donner mon mot de passe d'accès.");
+    window.openWhatsAppPayment = function() {
+      const msg = encodeURIComponent("Bonjour, j'ai payé 5000 FCFA pour la formation 'Lancer un business rentable avec 0 FCFA'. Veuillez m'envoyer mon code d'accès.");
       window.open("https://wa.me/22781563738?text=" + msg, '_blank');
     };
 
-    // Vérification du localStorage au chargement
+    // Restaurer l'état débloqué depuis localStorage
     function checkLocalUnlock() {
-      const savedUnlock = localStorage.getItem('NexFormation_unlocked_formation2');
-      if (savedUnlock === 'true') {
-        unlockContent();
+      const saved = localStorage.getItem('formation2_unlocked');
+      if (saved === 'true') {
+        pdfUnlocked = true;
+        document.getElementById('codeSection').style.display = 'none';
+        document.getElementById('pdfButtonArea').style.display = 'block';
       }
     }
 
-    // ============================================
-    // AUTH CHECK
-    // ============================================
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window._currentUser = user;
-      } else {
-        const saved = localStorage.getItem('NexFormation_current_user');
-        if (!saved) {
+      currentUser = user;
+      if (!user) {
+        const savedUid = localStorage.getItem('NexFormation_current_user');
+        if (!savedUid) {
           showNotif('Connexion requise', 'Connecte-toi pour accéder à cette formation premium', 'error');
           setTimeout(() => { window.location.href = 'login.html'; }, 2000);
         }
       }
     });
 
-    // Initialisation
-    document.addEventListener('DOMContentLoaded', () => {
-      checkLocalUnlock();
-      
-      const unlockBtn = document.getElementById('unlockBtn');
-      if (unlockBtn) {
-        unlockBtn.addEventListener('click', verifyPassword);
-      }
-      
-      const passwordInput = document.getElementById('passwordInput');
-      if (passwordInput) {
-        passwordInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') verifyPassword();
-        });
-      }
-      
-      const pdfOpenBtn = document.getElementById('pdfOpenBtn');
-      if (pdfOpenBtn && !isUnlocked) {
-        pdfOpenBtn.disabled = true;
-        pdfOpenBtn.style.opacity = '0.6';
-        pdfOpenBtn.style.cursor = 'not-allowed';
-      }
-    });
+    checkLocalUnlock();
   </script>
 </body>
 </html>

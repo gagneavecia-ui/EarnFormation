@@ -2,329 +2,654 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Formation Trading - Débutants | EarnZone</title>
+  <title>Formation 4 — Développement Personnel & Mindset de Gagnant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #000000; color: #ffffff; -webkit-font-smoothing: antialiased; }
+    :root {
+      --primary: #B76EFF;
+      --primary-dark: #8B3FE8;
+      --primary-light: #D4A1FF;
+      --bg-dark: #030305;
+      --text-light: #FFFFFF;
+      --text-dim: #8B90A8;
+      --card-bg: rgba(12,12,22,0.88);
+      --card-border: rgba(183,110,255,0.09);
+      --success: #2EE89A;
+      --danger: #FF4D6D;
+      --warning: #FFD166;
+      --glass-bg: rgba(183,110,255,0.05);
+      --glass-border: rgba(183,110,255,0.1);
+      --tr: all 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; min-height:100vh; overflow-x:hidden; scroll-behavior:smooth; }
+
+    body {
+      font-family:'Inter',sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size:14px; line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body::after {
+      content:''; position:fixed; top:0; left:0; width:100%; height:100%;
+      z-index:9999; pointer-events:none; opacity:0.03;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat:repeat; background-size:128px;
+    }
+
     .gradient-bg {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-      background: radial-gradient(ellipse at 15% 25%, rgba(0,255,204,0.06) 0%, transparent 50%),
-                  radial-gradient(ellipse at 85% 65%, rgba(255,77,148,0.06) 0%, transparent 50%),
-                  #000000;
+      position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
+      background:
+        radial-gradient(ellipse 65% 55% at 10% 15%, rgba(139,63,232,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(183,110,255,0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #030305 0%, #06061A 50%, #030305 100%);
     }
-    .noise {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      opacity: 0.05; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4xIiAvPjwvc3ZnPg==');
+
+    .orb {
+      position:fixed; border-radius:50%; filter:blur(80px);
+      z-index:-1; pointer-events:none; animation:orbFloat 8s ease-in-out infinite;
     }
+    .orb-1 { width:280px; height:280px; background:radial-gradient(circle,rgba(139,63,232,0.16),transparent 70%); top:-90px; left:-90px; }
+    .orb-2 { width:220px; height:220px; background:radial-gradient(circle,rgba(183,110,255,0.1),transparent 70%); bottom:15%; right:-70px; animation-delay:-4s; }
+
+    @keyframes orbFloat {
+      0%,100%{transform:translate(0,0) scale(1);}
+      33%{transform:translate(18px,-18px) scale(1.04);}
+      66%{transform:translate(-14px,14px) scale(0.96);}
+    }
+
     .header {
-      display: flex; justify-content: space-between; align-items: center; padding: 16px 5%;
-      background: rgba(0,0,0,0.96); backdrop-filter: blur(30px);
-      border-bottom: 1px solid rgba(255,255,255,0.03); position: sticky; top: 0; z-index: 100;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:13px 5%; background:rgba(3,3,5,0.93); backdrop-filter:blur(24px);
+      position:sticky; top:0; z-index:100;
+      border-bottom:1px solid rgba(183,110,255,0.07);
     }
-    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
     .logo-icon {
-      width: 36px; height: 36px; background: linear-gradient(135deg, #00ffcc, #9d4edd);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: black; transform: rotate(45deg);
+      font-size:26px; font-weight:900;
+      background:linear-gradient(135deg,#D4A1FF,#B76EFF,#8B3FE8);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      animation:nexusGlow 3.5s ease-in-out infinite;
     }
-    .logo-icon i { transform: rotate(-45deg); }
-    .logo-text {
-      font-size: 18px; font-weight: 700;
-      background: linear-gradient(135deg, #fff, #00ffcc);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    @keyframes nexusGlow {
+      0%,100%{filter:brightness(1);}
+      50%{filter:brightness(1.35) drop-shadow(0 0 10px rgba(183,110,255,0.6));}
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
-    .hero-formation {
-      background: rgba(10,10,10,0.8); border: 1px solid rgba(0,255,204,0.2);
-      border-radius: 32px; padding: 24px; margin-bottom: 30px; backdrop-filter: blur(12px);
+    .logo-text { font-size:16px; font-weight:700; text-transform:uppercase; }
+    .logo-text span { color:var(--primary); }
+
+    .back-btn {
+      width:38px; height:38px; background:var(--glass-bg); border:1px solid var(--glass-border);
+      border-radius:11px; display:flex; align-items:center; justify-content:center;
+      color:var(--text-dim); font-size:15px; text-decoration:none; transition:var(--tr);
     }
-    .badge-category {
-      display: inline-block; background: rgba(0,255,204,0.12);
-      border: 1px solid rgba(0,255,204,0.3); color: #00ffcc;
-      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 30px; margin-bottom: 16px;
+    .back-btn:hover { color:var(--primary); border-color:rgba(183,110,255,0.25); }
+    .back-btn:active { transform:scale(0.93); }
+
+    .container { max-width:520px; margin:0 auto; padding:22px 16px 60px; }
+
+    .formation-hero {
+      border-radius:26px; overflow:hidden; margin-bottom:20px;
+      position:relative;
+      animation: cardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
     }
-    .hero-formation h1 { font-size: 28px; font-weight: 800; line-height: 1.3; margin-bottom: 16px; }
-    .price-tag { font-size: 32px; font-weight: 800; color: #ffcc00; margin: 16px 0 12px; }
-    .price-tag small { font-size: 14px; font-weight: 400; color: #6b7a8d; }
-    .description { color: #b0c4de; line-height: 1.6; margin-bottom: 20px; }
-    
-    .access-card {
-      background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 28px; padding: 28px 20px; margin: 30px 0; text-align: center;
-      transition: all 0.3s;
+
+    @keyframes cardIn {
+      from{opacity:0; transform:translateY(18px);}
+      to{opacity:1; transform:translateY(0);}
     }
-    .access-card.locked { border-color: rgba(255,77,148,0.3); background: rgba(20,0,10,0.6); }
-    .access-card.unlocked { border-color: #00ffcc; box-shadow: 0 0 20px rgba(0,255,204,0.15); }
-    .lock-icon, .unlock-icon { font-size: 48px; margin-bottom: 16px; }
-    .lock-icon { color: #ff4d94; }
-    .unlock-icon { color: #00ffcc; }
-    .access-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-    .access-sub { color: #8e9eae; font-size: 14px; margin-bottom: 24px; }
-    .code-input-group { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 20px; }
+
+    .hero-image {
+      width:100%; height:210px; object-fit:cover; display:block;
+      filter:brightness(0.65) saturate(0.8);
+    }
+
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(3,3,5,0.95) 0%, rgba(3,3,5,0.3) 60%, transparent 100%);
+      display:flex; flex-direction:column; justify-content:flex-end; padding:20px;
+    }
+
+    .premium-tag {
+      display:inline-flex; align-items:center; gap:6px;
+      background:linear-gradient(135deg, rgba(255,77,109,0.2), rgba(255,77,109,0.1));
+      border:1px solid rgba(255,77,109,0.3); color:var(--danger);
+      padding:5px 14px; border-radius:100px; font-size:12px; font-weight:700;
+      margin-bottom:10px; width:fit-content;
+    }
+
+    .top-badge {
+      position:absolute; bottom:10px; left:10px;
+      background:linear-gradient(135deg, #B76EFF, #6C35D4);
+      color:white; font-size:11px; font-weight:700;
+      padding:4px 10px; border-radius:20px; z-index:3;
+    }
+
+    .hero-title {
+      font-size:21px; font-weight:800; line-height:1.2; margin-bottom:10px;
+      text-shadow:0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero-meta {
+      display:flex; gap:14px; flex-wrap:wrap;
+    }
+
+    .meta-item {
+      display:flex; align-items:center; gap:5px;
+      font-size:12px; color:rgba(255,255,255,0.7);
+    }
+    .meta-item i { color:var(--primary); font-size:11px; }
+
+    .card {
+      background:var(--card-bg); backdrop-filter:blur(14px);
+      border:1px solid var(--card-border); border-radius:22px;
+      padding:22px 18px; margin-bottom:14px; position:relative; overflow:hidden;
+      animation:cardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(183,110,255,0.35),transparent);
+    }
+
+    .card-title {
+      font-size:16px; font-weight:700; margin-bottom:14px;
+      display:flex; align-items:center; gap:9px;
+    }
+    .card-title i { color:var(--primary); font-size:15px; }
+
+    .desc-text {
+      color:rgba(255,255,255,0.8); font-size:14px; line-height:1.7; margin-bottom:0;
+    }
+
+    .learn-list {
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+    }
+
+    .learn-item {
+      display:flex; align-items:flex-start; gap:11px;
+      font-size:14px; color:rgba(255,255,255,0.85); line-height:1.5;
+    }
+
+    .learn-icon {
+      width:22px; height:22px; min-width:22px; border-radius:6px;
+      background:rgba(46,232,154,0.12); border:1px solid rgba(46,232,154,0.25);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--success); font-size:10px; margin-top:1px;
+    }
+
+    .stats-row {
+      display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
+      margin-bottom:0;
+    }
+
+    .stat-mini {
+      background:rgba(183,110,255,0.05); border:1px solid rgba(183,110,255,0.1);
+      border-radius:14px; padding:13px 10px; text-align:center;
+    }
+
+    .stat-mini-val {
+      font-size:18px; font-weight:800;
+      background:linear-gradient(135deg,var(--primary-light),var(--primary));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      margin-bottom:3px;
+    }
+
+    .stat-mini-lbl { font-size:11px; color:var(--text-dim); }
+
+    .code-access-card {
+      background:linear-gradient(135deg, rgba(183,110,255,0.08), rgba(139,63,232,0.04));
+      border:1px solid rgba(183,110,255,0.2);
+      border-radius:22px;
+      padding:20px 18px;
+      margin-bottom:14px;
+    }
+
+    .code-input-group {
+      display:flex; flex-direction:column; gap:12px;
+      margin:16px 0 8px;
+    }
+
     .code-input {
-      background: #0f0f12; border: 1px solid rgba(255,255,255,0.1); border-radius: 60px;
-      padding: 14px 20px; width: 220px; font-size: 16px; font-family: monospace;
-      letter-spacing: 1px; color: #00ffcc; text-align: center; outline: none;
+      background:rgba(0,0,0,0.6);
+      border:1px solid rgba(183,110,255,0.3);
+      border-radius:16px;
+      padding:14px 18px;
+      font-size:16px;
+      font-family:'Inter',monospace;
+      color:white;
+      outline:none;
+      transition:var(--tr);
+      text-align:center;
+      letter-spacing:2px;
     }
-    .code-input:focus { border-color: #00ffcc; }
-    .btn-validate {
-      background: linear-gradient(135deg, #00ffcc, #00cca3); border: none; border-radius: 60px;
-      padding: 0 28px; font-weight: 700; font-size: 15px; color: black; cursor: pointer;
-      display: flex; align-items: center; gap: 8px;
+
+    .code-input:focus {
+      border-color:var(--primary);
+      box-shadow:0 0 0 2px rgba(183,110,255,0.2);
     }
-    .btn-validate:hover { transform: scale(1.02); box-shadow: 0 0 12px rgba(0,255,204,0.5); }
-    .error-msg { color: #ff4757; font-size: 13px; margin-top: 12px; }
-    
+
+    .unlock-btn {
+      width:100%; padding:14px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      border:none; border-radius:14px;
+      color:white; font-size:15px; font-weight:700;
+      font-family:'Inter',sans-serif;
+      cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+
+    .unlock-btn:active { transform:scale(0.98); }
+
+    .code-hint {
+      font-size:12px; color:var(--text-dim); text-align:center;
+      margin-top:10px;
+    }
+    .code-hint i { color:var(--warning); margin-right:5px; }
+
+    .pdf-btn {
+      width:100%; padding:16px; border:none; border-radius:16px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      color:white; font-size:15px; font-weight:700;
+      cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      box-shadow:0 6px 24px rgba(139,63,232,0.35); margin-bottom:12px;
+    }
+    .pdf-btn:active { transform:scale(0.98); }
+
     .pdf-container {
-      display: none; margin-top: 30px; background: #0a0a0c;
-      border-radius: 24px; border: 1px solid rgba(0,255,204,0.3); overflow: hidden;
-      animation: fadeInUp 0.5s ease;
+      display:none; width:100%; border-radius:18px; overflow:hidden;
+      border:1px solid rgba(183,110,255,0.15); margin-top:12px;
+      animation:cardIn 0.4s ease both;
     }
-    .pdf-container.show { display: block; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .pdf-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 20px; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(0,255,204,0.2);
-      flex-wrap: wrap; gap: 15px;
+    .pdf-container.open { display:block; }
+
+    .pdf-toolbar {
+      background:rgba(8,8,20,0.95); backdrop-filter:blur(14px);
+      padding:12px 16px; display:flex; align-items:center;
+      justify-content:space-between; border-bottom:1px solid rgba(183,110,255,0.1);
+      flex-wrap:wrap; gap:10px;
     }
-    .pdf-header h2 { font-size: 18px; display: flex; align-items: center; gap: 10px; }
-    .download-btn {
-      background: rgba(0,255,204,0.1); border: 1px solid #00ffcc; border-radius: 40px;
-      padding: 10px 20px; font-weight: 600; color: #00ffcc; text-decoration: none;
-      font-size: 14px; transition: 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+
+    .pdf-toolbar-title {
+      font-size:13px; font-weight:600; color:var(--text-dim);
+      display:flex; align-items:center; gap:8px;
     }
-    .download-btn:hover { background: #00ffcc; color: black; }
-    .pdf-viewer {
-      width: 100%; height: 600px; border: none; background: #f1f1f1;
+
+    .pdf-toolbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
+
+    .pdf-action-btn {
+      background:var(--glass-bg); border:1px solid var(--glass-border);
+      border-radius:9px; padding:7px 12px;
+      color:var(--text-dim); font-size:12px; cursor:pointer;
+      transition:var(--tr); display:flex; align-items:center; gap:6px;
     }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 8px; color: #00ffcc;
-      text-decoration: none; margin-bottom: 20px; font-weight: 500;
+    .pdf-action-btn:hover { color:var(--primary); border-color:rgba(183,110,255,0.3); }
+
+    .pdf-frame-wrap {
+      background:#111118; width:100%; height:75vh;
+      display:flex; align-items:center; justify-content:center;
     }
-    .footer { text-align: center; padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.03); margin-top: 40px; color: #6b7a8d; font-size: 12px; }
+
+    .pdf-frame {
+      width:100%; height:100%; border:none; display:block;
+    }
+
+    .pdf-fallback {
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+      gap:16px; padding:30px; text-align:center;
+    }
+
+    .pdf-fallback i { font-size:44px; color:var(--primary); opacity:0.7; }
+    .pdf-fallback p { color:var(--text-dim); font-size:13px; }
+
+    .pdf-dl-btn {
+      padding:13px 24px; background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      color:white; border:none; border-radius:14px; font-size:14px; font-weight:700;
+      cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; gap:8px;
+      text-decoration:none;
+    }
+
+    .payment-section {
+      border-radius:22px; overflow:hidden; margin-bottom:14px;
+      background:var(--card-bg); border:1px solid var(--card-border);
+    }
+
+    .payment-header { padding:18px 18px 0; }
+    .payment-title { font-size:16px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:9px; }
+    .payment-title i { color:var(--warning); }
+    .payment-subtitle { font-size:13px; color:var(--text-dim); margin-bottom:16px; }
+
+    .payment-methods { display:flex; flex-direction:column; gap:0; }
+
+    .payment-method {
+      display:flex; align-items:center; gap:14px;
+      padding:15px 18px; border-top:1px solid rgba(183,110,255,0.05);
+      transition:var(--tr); cursor:pointer; text-decoration:none; color:inherit;
+    }
+    .payment-method:first-child { border-top:none; }
+    .payment-method:active { background:rgba(183,110,255,0.04); }
+
+    .pm-icon {
+      width:42px; height:42px; border-radius:12px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:900;
+    }
+    .pm-icon.wave { background:rgba(30,120,255,0.12); border:1px solid rgba(30,120,255,0.2); }
+    .pm-icon.mtn { background:rgba(255,209,0,0.12); border:1px solid rgba(255,209,0,0.2); }
+    .pm-icon.amana { background:rgba(255,140,0,0.12); border:1px solid rgba(255,140,0,0.2); }
+
+    .pm-content { flex:1; }
+    .pm-name { font-size:14px; font-weight:600; margin-bottom:2px; }
+    .pm-detail { font-size:12px; color:var(--text-dim); }
+    .pm-arrow { color:rgba(139,144,168,0.4); font-size:13px; }
+
+    .whatsapp-btn {
+      width:calc(100% - 36px); margin:14px 18px 18px;
+      background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.25);
+      border-radius:16px; color:#25D366;
+      font-size:14px; font-weight:700; padding:15px;
+      cursor:pointer; transition:var(--tr);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+    }
+    .whatsapp-btn:active { background:rgba(37,211,102,0.18); transform:scale(0.98); }
+
     .notification {
-      position: fixed; bottom: 20px; left: 16px; right: 16px; background: #0a0a0c;
-      backdrop-filter: blur(20px); border: 1px solid #00ffcc; border-radius: 16px;
-      padding: 14px 18px; display: flex; align-items: center; gap: 12px;
-      z-index: 1000; transform: translateY(200px); transition: transform 0.4s;
-      max-width: 400px; margin: 0 auto;
+      position:fixed; bottom:20px; left:16px; right:16px;
+      background:rgba(6,6,18,0.97); backdrop-filter:blur(20px);
+      border:1px solid var(--primary); border-radius:18px;
+      padding:13px 16px; display:flex; align-items:center; gap:13px;
+      z-index:1100; transform:translateY(120px);
+      transition:transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
     }
-    .notification.show { transform: translateY(0); }
+    .notification.show { transform:translateY(0); }
     .notification-icon {
-      width: 40px; height: 40px; background: linear-gradient(135deg, #00ffcc, #9d4edd);
-      border-radius: 12px; display: flex; align-items: center; justify-content: center; color: black;
+      width:42px; height:42px; border-radius:14px;
+      background:rgba(183,110,255,0.15); border:1px solid rgba(183,110,255,0.2);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--primary); font-size:18px;
     }
-    @media (max-width: 600px) {
-      .pdf-viewer { height: 450px; }
-      .hero-formation h1 { font-size: 22px; }
-      .code-input-group { flex-direction: column; align-items: stretch; }
-      .code-input { width: 100%; }
-      .btn-validate { justify-content: center; padding: 14px; }
-    }
+    .notification-content h4 { font-size:14px; font-weight:700; margin-bottom:2px; }
+    .notification-content p { font-size:12px; color:var(--text-dim); }
+    .notification.error { border-color:var(--danger); }
+    .notification.error .notification-icon { background:var(--danger); color:white; }
+    .notification.success { border-color:var(--success); }
+    .notification.success .notification-icon { background:var(--success); color:black; }
   </style>
 </head>
 <body>
-<div class="gradient-bg"></div>
-<div class="noise"></div>
 
-<header class="header">
-  <a href="index.html" class="logo">
-    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
-    <div class="logo-text">EarnZone</div>
-  </a>
-  <div><a href="profil.html" style="color: white; text-decoration: none;"><i class="fas fa-user-circle"></i> Compte</a></div>
-</header>
+  <div class="gradient-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-<main class="container">
-  <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux formations</a>
-
-  <div class="hero-formation">
-    <span class="badge-category"><i class="fas fa-chart-line"></i> Trading & Investissements</span>
-    <h1>📊 Trading pour débutants : De zéro à vos premiers gains</h1>
-    <div class="price-tag">10 000 FCFA <small>TTC · Accès à vie</small></div>
-    <p class="description">
-      Découvrez les bases du trading, l'analyse de marché, la gestion des risques et les stratégies gagnantes pour débuter sereinement. 
-      Cette formation PDF complète vous prépare à investir intelligemment.
-    </p>
-    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <span><i class="far fa-clock"></i> 4h00 de contenu</span>
-      <span><i class="fas fa-file-pdf"></i> PDF 60+ pages</span>
-      <span><i class="fas fa-chart-simple"></i> Graphiques & analyses</span>
-      <span><i class="fas fa-certificate"></i> Certificat inclus</span>
+  <div class="notification" id="notification">
+    <div class="notification-icon"><i class="fas fa-info"></i></div>
+    <div class="notification-content">
+      <h4 id="notifTitle">Notification</h4>
+      <p id="notifMsg">Message</p>
     </div>
   </div>
 
-  <!-- SECTION CODE D'ACCÈS -->
-  <div class="access-card locked" id="accessCard">
-    <div class="lock-icon"><i class="fas fa-lock"></i></div>
-    <div class="access-title">🔐 Formation premium verrouillée</div>
-    <div class="access-sub">Vous avez acheté cette formation ? Saisissez votre code d'accès unique pour débloquer le PDF.</div>
-    <div class="code-input-group">
-      <input type="text" id="accessCode" class="code-input" placeholder="code d'accès" autocomplete="off">
-      <button id="validateBtn" class="btn-validate"><i class="fas fa-key"></i> Vérifier & débloquer</button>
+  <header class="header">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">N</div>
+      <div class="logo-text">NEX<span>FORMATION</span></div>
+    </a>
+    <a href="index.html" class="back-btn" title="Retour">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+  </header>
+
+  <main class="container">
+
+    <div class="formation-hero">
+      <img src="https://images.pexels.com/photos/3755755/pexels-photo-3755755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mindset et Développement Personnel" class="hero-image">
+      <div class="hero-overlay">
+        <div class="premium-tag">
+          <i class="fas fa-lock"></i> PREMIUM — Code d'accès requis
+        </div>
+        <div class="top-badge">⭐ Top mondial</div>
+        <h1 class="hero-title">Développement Personnel & Mindset de Gagnant</h1>
+        <div class="hero-meta">
+          <div class="meta-item"><i class="far fa-clock"></i> 4h45</div>
+          <div class="meta-item"><i class="fas fa-star"></i> 4.8 (3 200 avis)</div>
+          <div class="meta-item"><i class="fas fa-users"></i> 3 200 étudiants</div>
+          <div class="meta-item"><i class="fas fa-file-pdf"></i> 1 pdf</div>
+        </div>
+      </div>
     </div>
-    <div id="errorMsg" class="error-msg"></div>
-    <div style="margin-top: 20px; font-size: 13px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 16px;">
-      <i class="fas fa-info-circle"></i> Après validation de votre paiement (My Nita, Wave), un agent vous envoie votre code d'accès personnel.
+
+    <div class="card">
+      <div class="card-title"><i class="fas fa-align-left"></i> À propos de cette formation</div>
+      <p class="desc-text">
+        Transformez votre état d'esprit, éliminez les croyances limitantes et construisez la vie que vous méritez. Cette formation vous guidera pas à pas vers une mentalité de gagnant, avec des techniques concrètes issues de la psychologie et du coaching.<br><br>
+        Que vous soyez bloqué par la peur, le manque de confiance ou la procrastination, vous apprendrez à reprogrammer votre cerveau pour atteindre vos objectifs.
+      </p>
     </div>
-  </div>
 
-  <!-- ZONE D'AFFICHAGE DU PDF (cachée par défaut) -->
-  <div id="pdfContainer" class="pdf-container">
-    <div class="pdf-header">
-      <h2><i class="fas fa-file-pdf" style="color:#ff4d4d"></i> 📄 Formation : Trading pour débutants</h2>
-      <button id="downloadPdfBtn" class="download-btn"><i class="fas fa-download"></i> Télécharger le PDF</button>
+    <div class="card">
+      <div class="card-title"><i class="fas fa-graduation-cap"></i> Ce que tu vas apprendre</div>
+      <ul class="learn-list">
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Les 7 lois du mindset des millionnaires</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Comment éliminer la peur de l'échec définitivement</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Techniques de visualisation et d'ancrage puissantes</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Développer une confiance en soi inébranlable</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Créer des habitudes qui transforment ta vie</li>
+        <li class="learn-item"><div class="learn-icon"><i class="fas fa-check"></i></div>Programmation neuro-linguistique (PNL) appliquée</li>
+      </ul>
     </div>
-    <iframe id="pdfViewer" class="pdf-viewer" src="" title="PDF de la formation Trading"></iframe>
-  </div>
 
-  <div class="footer">
-    <p>© 2026 EarnZone - Formations Trading & Finance</p>
-  </div>
-</main>
+    <div class="card">
+      <div class="card-title"><i class="fas fa-chart-bar"></i> Chiffres clés</div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">4h45</div><div class="stat-mini-lbl">Durée</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">4.8★</div><div class="stat-mini-lbl">Note</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">3 200</div><div class="stat-mini-lbl">Étudiants</div></div>
+      </div>
+    </div>
 
-<div id="notification" class="notification">
-  <div class="notification-icon"><i class="fas fa-check-circle"></i></div>
-  <div><strong id="notifTitle">Info</strong><br><span id="notifMsg">Message</span></div>
-</div>
+    <!-- ACCÈS PDF AVEC CODE -->
+    <div class="code-access-card" id="pdfCard">
+      <div class="card-title">
+        <i class="fas fa-file-pdf"></i> Accéder au contenu PDF
+      </div>
+      <p style="color:var(--text-dim); font-size:13px; margin-bottom:16px;">
+        Cette formation est <strong style="color:var(--warning)">premium (5 000 FCFA)</strong>. Entre ton code d'accès pour débloquer le PDF.
+      </p>
 
-<script>
-  // ================= CODES D'ACCÈS VALIDES =================
-  // 🔥 MODIFIE CETTE LISTE AVEC TES CODES PERSONNELS 🔥
-  const VALID_ACCESS_CODES = [
-    "TRADING-10000",    // Code principal
-    // Ajoute ici tous les codes que tu donnes à tes clients
-  ];
+      <div class="code-input-group" id="codeSection">
+        <input type="text" id="accessCode" class="code-input" placeholder="" maxlength="12" autocomplete="off">
+        <button class="unlock-btn" id="unlockBtn" onclick="verifyAccessCode()">
+          <i class="fas fa-key"></i> Débloquer le PDF
+        </button>
+        </div>
+      </div>
 
-  // 📁 NOM DE TON FICHIER PDF (à mettre dans le même dossier que cette page)
-  // Renomme ton fichier PDF en "formation-trading.pdf" ou change le nom ci-dessous
-  const PDF_FILENAME = "formation-trading.pdf";
-  
-  let isUnlocked = false;
-  const STORAGE_KEY = 'earnzone_trading_unlocked';
-  const STORAGE_CODE_KEY = 'earnzone_trading_code';
+      <div id="pdfButtonArea" style="display:none;">
+        <button class="pdf-btn" id="pdfOpenBtn" onclick="togglePDF()">
+          <i class="fas fa-book-open" id="pdfBtnIcon"></i>
+          <span id="pdfBtnText">Lire la formation PDF</span>
+        </button>
+      </div>
 
-  function showNotif(title, message, isError = false) {
-    const notif = document.getElementById('notification');
-    const notifTitle = document.getElementById('notifTitle');
-    const notifMsg = document.getElementById('notifMsg');
-    const iconDiv = notif.querySelector('.notification-icon');
-    notifTitle.innerText = title;
-    notifMsg.innerText = message;
-    if (isError) {
-      iconDiv.style.background = "#ff4757";
-      iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
-    } else {
-      iconDiv.style.background = "linear-gradient(135deg, #00ffcc, #9d4edd)";
-      iconDiv.innerHTML = '<i class="fas fa-check-circle"></i>';
+      <div class="pdf-container" id="pdfContainer">
+        <div class="pdf-toolbar">
+          <div class="pdf-toolbar-title"><i class="fas fa-file-pdf"></i> Mindset de Gagnant — Formation PDF</div>
+          <div class="pdf-toolbar-actions">
+            <a class="pdf-action-btn" id="pdfDlBtn" href="formation4.pdf" download="formation4.pdf"><i class="fas fa-download"></i> Télécharger</a>
+            <button class="pdf-action-btn" onclick="togglePDF()"><i class="fas fa-times"></i> Fermer</button>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap">
+          <iframe id="pdfFrame" class="pdf-frame" src="" title="Formation PDF"></iframe>
+          <div class="pdf-fallback" id="pdfFallback">
+            <i class="fas fa-file-pdf"></i>
+            <p>Ton navigateur ne peut pas afficher le PDF directement.<br>Clique pour télécharger.</p>
+            <a class="pdf-dl-btn" href="formation4.pdf" download="formation4.pdf"><i class="fas fa-download"></i> Télécharger le PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIEMENT POUR OBTENIR LE CODE -->
+    <div class="payment-section">
+      <div class="payment-header">
+        <div class="payment-title"><i class="fas fa-lock"></i> Obtenir ton code d'accès</div>
+        <p class="payment-subtitle">Paye 5 000 FCFA via l'un de ces moyens, puis reçois ton code sur WhatsApp.</p>
+      </div>
+      <div class="payment-methods">
+        <div class="payment-method"><div class="pm-icon wave"><span style="color:#1E78FF;">W</span></div><div class="pm-content"><div class="pm-name">Wave</div><div class="pm-detail">+227 81 56 37 38</div></div><div class="pm-arrow"><i class="fas fa-chevron-right"></i></div></div>
+        <div class="payment-method"><div class="pm-icon mtn"><span style="color:#FFD100;">MyN</span></div><div class="pm-content"><div class="pm-name">My Nita</div><div class="pm-detail">+227 81 56 37 38</div></div><div class="pm-arrow"><i class="fas fa-chevron-right"></i></div></div>
+        <div class="payment-method"><div class="pm-icon amana"><span style="color:#FF8C00;">AM</span></div><div class="pm-content"><div class="pm-name">AmanaTa</div><div class="pm-detail">+227 81 56 37 38</div></div><div class="pm-arrow"><i class="fas fa-chevron-right"></i></div></div>
+      </div>
+      <button class="whatsapp-btn" onclick="openWhatsAppPayment()">
+        <i class="fab fa-whatsapp"></i> Contacter pour recevoir mon code
+      </button>
+    </div>
+
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBWTEWAQjQuDzY26BghtTcqfdyVEmQZXe8",
+      authDomain: "nexformation-ebcc0.firebaseapp.com",
+      databaseURL: "https://nexformation-ebcc0-default-rtdb.firebaseio.com",
+      projectId: "nexformation-ebcc0",
+      storageBucket: "nexformation-ebcc0.firebasestorage.app",
+      messagingSenderId: "592625968577",
+      appId: "1:592625968577:web:53482aea0414983427bb40"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const PDF_FILENAME = "formation4.pdf";
+    const VALID_CODE = "MP-4F2E-7L";
+    let pdfUnlocked = false;
+    let currentUser = null;
+    let notifTimer = null;
+
+    function showNotif(title, msg, type) {
+      type = type || 'info';
+      const notif = document.getElementById('notification');
+      document.getElementById('notifTitle').textContent = title;
+      document.getElementById('notifMsg').textContent = msg;
+      const icon = notif.querySelector('.notification-icon i');
+      notif.className = 'notification show';
+      if (type === 'error') { notif.classList.add('error'); icon.className = 'fas fa-exclamation-triangle'; }
+      else if (type === 'success') { notif.classList.add('success'); icon.className = 'fas fa-check-circle'; }
+      else { icon.className = 'fas fa-info'; }
+      if (notifTimer) clearTimeout(notifTimer);
+      notifTimer = setTimeout(() => notif.classList.remove('show'), 3500);
     }
-    notif.classList.add('show');
-    setTimeout(() => notif.classList.remove('show'), 4000);
-  }
 
-  function unlockContent(usedCode) {
-    if (isUnlocked) return;
-    isUnlocked = true;
-    
-    localStorage.setItem(STORAGE_KEY, 'true');
-    localStorage.setItem(STORAGE_CODE_KEY, usedCode);
-    
-    const accessCard = document.getElementById('accessCard');
-    accessCard.classList.remove('locked');
-    accessCard.classList.add('unlocked');
-    accessCard.innerHTML = `
-      <div class="unlock-icon"><i class="fas fa-unlock-alt"></i></div>
-      <div class="access-title">✅ Formation débloquée !</div>
-      <div class="access-sub">Vous avez maintenant accès au PDF de la formation.</div>
-      <div><i class="fas fa-check-circle" style="color:#00ffcc"></i> Code utilisé : <strong>${usedCode}</strong></div>
-    `;
-    
-    const pdfContainer = document.getElementById('pdfContainer');
-    pdfContainer.classList.add('show');
-    const pdfViewer = document.getElementById('pdfViewer');
-    pdfViewer.src = PDF_FILENAME;
-    
-    showNotif("Accès accordé 🎓", "Formation Trading débloquée ! Vous pouvez lire ou télécharger le PDF.", false);
-  }
-
-  function checkAccessCode() {
-    const codeInput = document.getElementById('accessCode');
-    const code = codeInput.value.trim().toUpperCase();
-    const errorDiv = document.getElementById('errorMsg');
-    
-    if (code === "") {
-      errorDiv.innerText = "Veuillez entrer votre code d'accès.";
-      showNotif("Code requis", "Entrez le code reçu après paiement.", true);
-      return;
+    function markFormationUnlocked(user) {
+      localStorage.setItem('NexFormation_unlocked_formation4', 'true');
+      if (user) {
+        try {
+          updateDoc(doc(db, "users", user.uid), { unlockedCourses: arrayUnion("formation4") }).catch(e => console.warn("Firestore:", e.code));
+        } catch(e) {}
+      }
     }
-    
-    if (VALID_ACCESS_CODES.includes(code)) {
-      errorDiv.innerText = "";
-      unlockContent(code);
-    } else {
-      errorDiv.innerText = "❌ Code invalide. Vérifiez votre code ou contactez le support.";
-      showNotif("Code incorrect", "Le code que vous avez entré n'est pas reconnu.", true);
-    }
-  }
 
-  function downloadPDF() {
-    if (!isUnlocked) {
-      showNotif("Accès refusé", "Vous devez d'abord débloquer la formation avec un code valide.", true);
-      return;
-    }
-    
-    const link = document.createElement('a');
-    link.href = PDF_FILENAME;
-    link.download = "EarnZone-Trading-Debutants.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    showNotif("Téléchargement", "Le téléchargement du PDF a commencé.", false);
-  }
+    window.verifyAccessCode = function() {
+      if (pdfUnlocked) {
+        showNotif('Déjà débloqué', 'Le PDF est déjà accessible.', 'success');
+        return;
+      }
+      const inputCode = document.getElementById('accessCode').value.trim();
+      if (inputCode === VALID_CODE) {
+        pdfUnlocked = true;
+        localStorage.setItem('formation4_unlocked', 'true');
+        markFormationUnlocked(currentUser);
+        document.getElementById('codeSection').style.display = 'none';
+        document.getElementById('pdfButtonArea').style.display = 'block';
+        showNotif('Accès accordé', 'PDF débloqué ! Tu peux maintenant lire la formation.', 'success');
+      } else {
+        showNotif('Code invalide', 'Le code que tu as entré n\'est pas valide. Vérifie ou contacte le support.', 'error');
+        document.getElementById('accessCode').value = '';
+        document.getElementById('accessCode').focus();
+      }
+    };
 
-  function checkPreviousUnlock() {
-    const previouslyUnlocked = localStorage.getItem(STORAGE_KEY);
-    const previousCode = localStorage.getItem(STORAGE_CODE_KEY);
-    if (previouslyUnlocked === 'true' && previousCode && VALID_ACCESS_CODES.includes(previousCode)) {
-      isUnlocked = true;
-      const accessCard = document.getElementById('accessCard');
-      accessCard.classList.remove('locked');
-      accessCard.classList.add('unlocked');
-      accessCard.innerHTML = `
-        <div class="unlock-icon"><i class="fas fa-unlock-alt"></i></div>
-        <div class="access-title">✅ Formation déjà débloquée</div>
-        <div class="access-sub">Votre accès est toujours actif. Profitez du PDF ci-dessous.</div>
-        <div><i class="fas fa-check-circle" style="color:#00ffcc"></i> Code utilisé : ${previousCode}</div>
-      `;
-      const pdfContainer = document.getElementById('pdfContainer');
-      pdfContainer.classList.add('show');
-      const pdfViewer = document.getElementById('pdfViewer');
-      pdfViewer.src = PDF_FILENAME;
-      showNotif("Session restaurée", "Bienvenue, votre accès est toujours actif.", false);
-    }
-  }
+    window.togglePDF = function() {
+      if (!pdfUnlocked) {
+        showNotif('Accès verrouillé', 'Entre ton code d\'accès pour débloquer le PDF.', 'error');
+        return;
+      }
+      const container = document.getElementById('pdfContainer');
+      const btnIcon = document.getElementById('pdfBtnIcon');
+      const btnText = document.getElementById('pdfBtnText');
+      const frame = document.getElementById('pdfFrame');
+      const isOpen = container.classList.contains('open');
 
-  // Protection de connexion
-  (function() {
-    let userId = localStorage.getItem('NX_Money_current_user') || localStorage.getItem('earnzone_current_user');
-    if (!userId) {
-      window.location.href = 'login.html';
-    }
-  })();
+      if (!isOpen) {
+        if (frame.src === '' || frame.src === window.location.href) {
+          frame.src = PDF_FILENAME;
+        }
+        container.classList.add('open');
+        btnIcon.className = 'fas fa-times';
+        btnText.textContent = 'Fermer le PDF';
+        setTimeout(() => {
+          try {
+            const frameDoc = frame.contentDocument || frame.contentWindow.document;
+            if (!frameDoc || frameDoc.body.innerHTML === '') {
+              document.getElementById('pdfFrame').style.display = 'none';
+              document.getElementById('pdfFallback').style.display = 'flex';
+            }
+          } catch(e) {}
+        }, 2000);
+        showNotif('PDF ouvert', 'Bonne formation !', 'success');
+      } else {
+        container.classList.remove('open');
+        btnIcon.className = 'fas fa-book-open';
+        btnText.textContent = 'Lire la formation PDF';
+      }
+    };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    checkPreviousUnlock();
-    const validateBtn = document.getElementById('validateBtn');
-    const codeInput = document.getElementById('accessCode');
-    validateBtn.addEventListener('click', checkAccessCode);
-    codeInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAccessCode(); });
-    const downloadBtn = document.getElementById('downloadPdfBtn');
-    downloadBtn.addEventListener('click', downloadPDF);
-  });
-</script>
+    window.openWhatsAppPayment = function() {
+      const msg = encodeURIComponent("Bonjour, j'ai payé 5000 FCFA pour la formation 'Développement Personnel & Mindset de Gagnant'. Veuillez m'envoyer mon code d'accès.");
+      window.open("https://wa.me/22781563738?text=" + msg, '_blank');
+    };
+
+    function checkLocalUnlock() {
+      const saved = localStorage.getItem('formation4_unlocked');
+      if (saved === 'true') {
+        pdfUnlocked = true;
+        document.getElementById('codeSection').style.display = 'none';
+        document.getElementById('pdfButtonArea').style.display = 'block';
+      }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (!user) {
+        const savedUid = localStorage.getItem('NexFormation_current_user');
+        if (!savedUid) {
+          showNotif('Connexion requise', 'Connecte-toi pour accéder à cette formation premium', 'error');
+          setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+        }
+      }
+    });
+
+    checkLocalUnlock();
+  </script>
 </body>
 </html>
