@@ -208,7 +208,7 @@
       50% { transform: scale(1.1); }
     }
 
-    #profilePhotoInput { display: none; }
+    /* inputs cachés gérés inline */
 
     /* Upload progress */
     .upload-progress {
@@ -259,60 +259,6 @@
       50% { box-shadow: 0 0 0 4px rgba(46,232,154,0.1); }
     }
 
-    /* ===== COMPTEUR FORMATIONS ===== */
-    .formations-counter {
-      margin: 16px 0 0;
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      animation: cardIn 0.5s 0.1s cubic-bezier(0.22,1,0.36,1) both;
-    }
-
-    .counter-card {
-      background: linear-gradient(135deg, rgba(183,110,255,0.1), rgba(139,63,232,0.06));
-      border: 1px solid rgba(183,110,255,0.15);
-      border-radius: 22px; padding: 20px 40px;
-      text-align: center; position: relative; overflow: hidden;
-      width: 100%;
-    }
-
-    .counter-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(183,110,255,0.4), transparent);
-    }
-
-    .counter-number {
-      font-size: 52px; font-weight: 800; line-height: 1;
-      background: linear-gradient(135deg, var(--primary-light), var(--primary), var(--primary-dark));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      margin-bottom: 4px;
-      animation: counterGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes counterGlow {
-      0%,100% { filter: brightness(1); }
-      50% { filter: brightness(1.2) drop-shadow(0 0 12px rgba(183,110,255,0.5)); }
-    }
-
-    .counter-label {
-      font-size: 13px; color: var(--text-dim); font-weight: 500; letter-spacing: 0.03em;
-    }
-
-    .counter-bar-wrap {
-      width: 100%; height: 5px; background: rgba(255,255,255,0.06);
-      border-radius: 3px; margin-top: 14px; overflow: hidden;
-    }
-
-    .counter-bar {
-      height: 100%; border-radius: 3px;
-      background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light));
-      transition: width 1s cubic-bezier(0.22,1,0.36,1);
-      box-shadow: 0 0 8px rgba(183,110,255,0.5);
-    }
-
-    .counter-hint {
-      font-size: 11px; color: rgba(139,144,168,0.55);
-      display: flex; align-items: center; gap: 5px;
-    }
-    .counter-hint i { color: var(--primary); font-size: 10px; }
 
     /* ===== MENU LIST ===== */
     .section-label {
@@ -379,6 +325,71 @@
     }
 
     /* ===== NOTIFICATION ===== */
+
+    /* ===== BOTTOM SHEET PHOTO ===== */
+    .photo-sheet-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(10px);
+      z-index: 600; display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .photo-sheet-overlay.open { opacity: 1; pointer-events: all; }
+
+    .photo-sheet {
+      background: rgba(8,8,20,0.98); backdrop-filter: blur(24px);
+      border: 1px solid rgba(183,110,255,0.12); border-radius: 28px 28px 0 0;
+      padding: 18px 20px 44px; width: 100%; max-width: 500px;
+      transform: translateY(100%);
+      transition: transform 0.42s cubic-bezier(0.34,1.2,0.64,1);
+      position: relative;
+    }
+    .photo-sheet-overlay.open .photo-sheet { transform: translateY(0); }
+    .photo-sheet::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(183,110,255,0.55),transparent);
+    }
+    .sheet-handle {
+      width:40px; height:4px; background:rgba(183,110,255,0.25);
+      border-radius:2px; margin:0 auto 22px;
+    }
+    .sheet-title {
+      text-align:center; font-size:11px; font-weight:700;
+      color:var(--text-dim); margin-bottom:20px;
+      text-transform:uppercase; letter-spacing:0.08em;
+    }
+    .sheet-options { display:flex; flex-direction:column; gap:10px; }
+    .sheet-option {
+      display:flex; align-items:center; gap:16px; padding:16px 18px;
+      background:rgba(183,110,255,0.05); border:1px solid rgba(183,110,255,0.1);
+      border-radius:18px; cursor:pointer; transition:var(--transition);
+      font-family:"Inter",sans-serif; width:100%; text-align:left;
+    }
+    .sheet-option:active { background:rgba(183,110,255,0.12); transform:scale(0.98); }
+    .sheet-option-icon {
+      width:46px; height:46px; border-radius:14px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:20px;
+    }
+    .sheet-option-icon.camera {
+      background:linear-gradient(135deg,rgba(183,110,255,0.2),rgba(139,63,232,0.1));
+      border:1px solid rgba(183,110,255,0.2); color:var(--primary);
+    }
+    .sheet-option-icon.gallery {
+      background:linear-gradient(135deg,rgba(46,232,154,0.15),rgba(46,232,154,0.06));
+      border:1px solid rgba(46,232,154,0.2); color:var(--success);
+    }
+    .sheet-option-content { flex:1; }
+    .sheet-option-title { font-size:15px; font-weight:700; color:var(--text-light); margin-bottom:2px; }
+    .sheet-option-sub { font-size:12px; color:var(--text-dim); }
+    .sheet-option-arrow { color:rgba(139,144,168,0.35); font-size:13px; }
+    .sheet-cancel {
+      width:100%; margin-top:12px; padding:14px;
+      background:transparent; border:1px solid rgba(255,255,255,0.07);
+      border-radius:16px; color:var(--text-dim);
+      font-size:14px; font-family:"Inter",sans-serif; cursor:pointer;
+      transition:var(--transition);
+    }
+    .sheet-cancel:active { background:rgba(255,255,255,0.04); }
     .notification {
       position: fixed; bottom: 20px; left: 16px; right: 16px;
       background: rgba(6,6,18,0.97); backdrop-filter: blur(20px);
@@ -410,6 +421,33 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
 
+
+  <!-- BOTTOM SHEET CHOIX PHOTO -->
+  <div class="photo-sheet-overlay" id="photoSheetOverlay" onclick="closePhotoSheet(event)">
+    <div class="photo-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-title">Photo de profil</div>
+      <div class="sheet-options">
+        <button class="sheet-option" onclick="pickCamera()">
+          <div class="sheet-option-icon camera"><i class="fas fa-camera"></i></div>
+          <div class="sheet-option-content">
+            <div class="sheet-option-title">Prendre une photo</div>
+            <div class="sheet-option-sub">Utiliser ton appareil photo</div>
+          </div>
+          <div class="sheet-option-arrow"><i class="fas fa-chevron-right"></i></div>
+        </button>
+        <button class="sheet-option" onclick="pickGallery()">
+          <div class="sheet-option-icon gallery"><i class="fas fa-images"></i></div>
+          <div class="sheet-option-content">
+            <div class="sheet-option-title">Choisir dans la galerie</div>
+            <div class="sheet-option-sub">PNG, JPG, WEBP et autres</div>
+          </div>
+          <div class="sheet-option-arrow"><i class="fas fa-chevron-right"></i></div>
+        </button>
+      </div>
+      <button class="sheet-cancel" onclick="closePhotoSheet()">Annuler</button>
+    </div>
+  </div>
   <div class="notification" id="notification">
     <div class="notification-icon"><i class="fas fa-info"></i></div>
     <div class="notification-content">
@@ -433,8 +471,9 @@
     <!-- HERO PROFIL -->
     <div class="profile-hero">
 
-      <!-- Avatar avec upload -->
-      <div class="avatar-wrapper" onclick="document.getElementById('profilePhotoInput').click()" id="avatarWrapper">
+
+      <!-- Avatar — tap ouvre le menu choix -->
+      <div class="avatar-wrapper" onclick="openPhotoSheet()" id="avatarWrapper">
         <div class="avatar-ring"></div>
         <div class="avatar-ring-inner"></div>
         <div class="avatar-img" id="profileAvatar">
@@ -446,16 +485,15 @@
         </div>
         <div class="upload-progress" id="uploadProgress">
           <div class="upload-spinner"></div>
-          <div class="upload-pct" id="uploadPct">0%</div>
+          <div class="upload-pct" id="uploadPct">...</div>
         </div>
         <div class="camera-badge"><i class="fas fa-camera"></i></div>
       </div>
 
-      <!-- Input fichier : tous formats image -->
-      <input type="file" id="profilePhotoInput"
-        accept="image/png, image/jpeg, image/jpg, image/webp, image/gif, image/bmp, image/svg+xml, image/*"
-        capture="environment">
-
+      <!-- Input appareil photo -->
+      <input type="file" id="inputCamera" accept="image/*" capture="environment" style="display:none">
+      <!-- Input galerie -->
+      <input type="file" id="inputGallery" accept="image/png,image/jpeg,image/jpg,image/webp,image/gif,image/bmp,image/*" style="display:none">
       <h1 class="profile-name" id="profileName">Chargement...</h1>
 
       <div class="profile-info-row" id="emailRow">
@@ -476,21 +514,6 @@
         <i class="fas fa-crown"></i> Accès illimité à vie
       </div>
 
-    </div>
-
-    <!-- COMPTEUR FORMATIONS -->
-    <div class="formations-counter">
-      <div class="counter-card">
-        <div class="counter-number" id="coursesCompleted">0</div>
-        <div class="counter-label">Formation(s) suivie(s)</div>
-        <div class="counter-bar-wrap">
-          <div class="counter-bar" id="counterBar" style="width: 0%"></div>
-        </div>
-      </div>
-      <div class="counter-hint">
-        <i class="fas fa-info-circle"></i>
-        <span>Se met à jour automatiquement quand tu accèdes aux formations</span>
-      </div>
     </div>
 
     <!-- MENU -->
@@ -551,7 +574,6 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    const TOTAL_FORMATIONS = 4; // nombre total de formations sur la plateforme
 
     let notificationTimer = null;
     let currentUser = null;
@@ -574,60 +596,6 @@
     }
 
     // ============================================
-    // COMPTEUR FORMATIONS — LIT LE localStorage
-    // Chaque page de formation doit sauver:
-    //   NexFormation_started_formationX = "true"
-    // ============================================
-    function getStartedFormationsCount() {
-      const formationIds = ['formation1', 'formation2', 'formation3', 'formation4'];
-      let count = 0;
-      formationIds.forEach(function(id) {
-        if (localStorage.getItem('NexFormation_started_' + id) === 'true') count++;
-      });
-      return count;
-    }
-
-    function updateCoursesCounter(firestoreCourses) {
-      // Priorité : Firestore si dispo, sinon localStorage
-      let count = 0;
-
-      if (firestoreCourses && firestoreCourses.length > 0) {
-        count = firestoreCourses.length;
-      } else {
-        count = getStartedFormationsCount();
-      }
-
-      const el = document.getElementById('coursesCompleted');
-      const bar = document.getElementById('counterBar');
-
-      // Animation count-up
-      let current = 0;
-      const target = count;
-      const duration = 900;
-      const step = duration / Math.max(target, 1);
-
-      function tick() {
-        current++;
-        el.textContent = current;
-        if (current < target) setTimeout(tick, step);
-        else el.textContent = target;
-      }
-
-      if (target > 0) {
-        setTimeout(tick, 300);
-      } else {
-        el.textContent = '0';
-      }
-
-      // Barre de progression
-      const pct = Math.min((count / TOTAL_FORMATIONS) * 100, 100);
-      setTimeout(function() {
-        bar.style.width = pct + '%';
-      }, 400);
-    }
-
-    // ============================================
-    // PHOTO DE PROFIL — BASE64 LOCALE (sans Storage)
     // Sauvegarde en localStorage et dans Firebase Auth photoURL
     // ============================================
     function showAvatarPhoto(dataUrl) {
@@ -728,7 +696,7 @@
       if (profilePhoto) showAvatarPhoto(profilePhoto);
 
       // Compteur
-      updateCoursesCounter(courses);
+
     }
 
     // ============================================
@@ -749,7 +717,7 @@
       loadSavedPhoto(currentUser.uid);
 
       // Compteur localStorage immédiat
-      updateCoursesCounter(null);
+
 
       // Puis Firestore pour données complètes
       try {
@@ -780,23 +748,52 @@
             });
           } catch(e) {}
           // Met à jour quand même le compteur localStorage
-          updateCoursesCounter(null);
+    
         }
       } catch (error) {
         console.warn("Firestore profil non disponible:", error.code);
-        updateCoursesCounter(null);
+  
       }
     }
 
+
     // ============================================
-    // ÉVÉNEMENTS
+    // BOTTOM SHEET — PHOTO CHOIX
     // ============================================
-    document.getElementById('profilePhotoInput').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) handlePhotoUpload(file);
-      // Reset input pour permettre re-sélection du même fichier
-      e.target.value = '';
-    });
+    window.openPhotoSheet = function() {
+      document.getElementById("photoSheetOverlay").classList.add("open");
+    };
+
+    window.closePhotoSheet = function(e) {
+      if (!e || e.target === document.getElementById("photoSheetOverlay")) {
+        document.getElementById("photoSheetOverlay").classList.remove("open");
+      }
+    };
+
+    window.pickCamera = function() {
+      document.getElementById("photoSheetOverlay").classList.remove("open");
+      setTimeout(function() {
+        document.getElementById("inputCamera").click();
+      }, 200);
+    };
+
+    window.pickGallery = function() {
+      document.getElementById("photoSheetOverlay").classList.remove("open");
+      setTimeout(function() {
+        document.getElementById("inputGallery").click();
+      }, 200);
+    };
+
+    function setupInputListeners() {
+      ["inputCamera","inputGallery"].forEach(function(id) {
+        document.getElementById(id).addEventListener("change", function(e) {
+          const file = e.target.files[0];
+          if (file) handlePhotoUpload(file);
+          e.target.value = "";
+        });
+      });
+    }
+    setupInputListeners();
 
     // ============================================
     // DÉCONNEXION
